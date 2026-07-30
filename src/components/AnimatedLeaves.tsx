@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion, useMotionValue, useSpring, useTransform, MotionValue } from 'motion/react';
 import { useEffect, useState } from 'react';
 
 // Simple Leaf SVG
@@ -16,9 +16,64 @@ const BirdIcon = () => (
   </svg>
 );
 
+const AnimatedLeaf = ({ 
+  leaf, 
+  mouseX, 
+  mouseY 
+}: { 
+  leaf: { id: number; x: number; delay: number; duration: number }; 
+  mouseX: MotionValue<number>; 
+  mouseY: MotionValue<number>; 
+}) => {
+  const depth = (leaf.id % 3) + 1; // 1, 2, or 3
+  const range = depth * 30; // 30, 60, or 90
+  
+  const parallaxX = useTransform(mouseX, [-1, 1], [-range, range]);
+  const parallaxY = useTransform(mouseY, [-1, 1], [-range, range]);
+  
+  const springX = useSpring(parallaxX, { stiffness: 50, damping: 20 });
+  const springY = useSpring(parallaxY, { stiffness: 50, damping: 20 });
+
+  return (
+    <motion.div
+      className="absolute top-0 will-change-transform z-0"
+      style={{ x: springX, y: springY }}
+    >
+      <motion.div
+        initial={{ y: "-10vh", x: `${leaf.x}vw`, rotate: 0 }}
+        animate={{
+          y: "110vh",
+          x: [`${leaf.x}vw`, `${leaf.x - 5}vw`, `${leaf.x + 5}vw`, `${leaf.x}vw`],
+          rotate: 360
+        }}
+        transition={{
+          y: { duration: leaf.duration, repeat: Infinity, ease: "linear", delay: leaf.delay },
+          x: { duration: leaf.duration / 2, repeat: Infinity, ease: "easeInOut", delay: leaf.delay },
+          rotate: { duration: leaf.duration / 3, repeat: Infinity, ease: "linear", delay: leaf.delay }
+        }}
+      >
+        <LeafIcon />
+      </motion.div>
+    </motion.div>
+  );
+};
+
 export default function AnimatedLeaves() {
   const [leaves, setLeaves] = useState<{ id: number; x: number; delay: number; duration: number }[]>([]);
   const [birds, setBirds] = useState<{ id: number; y: number; delay: number; duration: number }[]>([]);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX.set((e.clientX / window.innerWidth) * 2 - 1);
+      mouseY.set((e.clientY / window.innerHeight) * 2 - 1);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
 
   useEffect(() => {
     // Generate random leaves
@@ -43,23 +98,7 @@ export default function AnimatedLeaves() {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       {leaves.map((leaf) => (
-        <motion.div
-          key={`leaf-${leaf.id}`}
-          className="absolute top-0 will-change-transform"
-          initial={{ y: "-10vh", x: `${leaf.x}vw`, rotate: 0 }}
-          animate={{
-            y: "110vh",
-            x: [`${leaf.x}vw`, `${leaf.x - 5}vw`, `${leaf.x + 5}vw`, `${leaf.x}vw`],
-            rotate: 360
-          }}
-          transition={{
-            y: { duration: leaf.duration, repeat: Infinity, ease: "linear", delay: leaf.delay },
-            x: { duration: leaf.duration / 2, repeat: Infinity, ease: "easeInOut", delay: leaf.delay },
-            rotate: { duration: leaf.duration / 3, repeat: Infinity, ease: "linear", delay: leaf.delay }
-          }}
-        >
-          <LeafIcon />
-        </motion.div>
+        <AnimatedLeaf key={`leaf-${leaf.id}`} leaf={leaf} mouseX={mouseX} mouseY={mouseY} />
       ))}
 
       {birds.map((bird) => (

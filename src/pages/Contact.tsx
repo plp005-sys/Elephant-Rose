@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
 import Navbar from '../components/Navbar';
@@ -150,7 +150,7 @@ export default function Contact() {
                       onChange={handleChange}
                       required
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#71ea27]/50 focus:border-transparent transition-all"
-                      placeholder="John Doe"
+                      placeholder="Sarah Mavhunga"
                     />
                   </div>
                   <div className="space-y-2">
@@ -226,7 +226,7 @@ export default function Contact() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button className="bg-[#71ea27] hover:bg-[#5ec81e] text-[#111] font-bold py-4 px-8 rounded-xl transition-all hover:scale-[1.02] active:scale-95 w-full sm:w-auto">
-                Donate via Credit Card
+                Donate
               </button>
               <button className="bg-transparent border border-white/30 hover:border-[#71ea27] hover:text-[#71ea27] text-white font-bold py-4 px-8 rounded-xl transition-all hover:scale-[1.02] active:scale-95 w-full sm:w-auto">
                 Other Ways to Give

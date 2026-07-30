@@ -33,14 +33,14 @@ export default function AboutSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="w-full md:w-1/3 flex flex-col items-center text-center"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
-              Leading the Way for<br />Ecological Change
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight text-[#71ea27]">
+              Rosie the African Elephant
             </h2>
-            <p className="text-[#2b5a4d] mb-8 text-sm md:text-base leading-relaxed max-w-sm">
-              We are passionate environmental advocates committed to protecting our planet and promoting sustainable living.
+            <p className="text-white mb-8 text-sm md:text-base leading-relaxed max-w-sm">
+              We are passionate environmental advocates committed to protecting the wild and promoting sustainable living; The Elephant Rose Foundation aims to inspire the young through Rosie's story, (Rosie the African Elephant) promoting love, forgiveness, and environmental awareness. We strive to foster a compassion for all wildlife.
             </p>
-            <button className="bg-[#dcf0fb] hover:bg-[#cbe8f8] text-[#0a473a] font-semibold py-3 px-8 rounded-full transition-colors duration-300">
-              Learn More
+            <button className="bg-[#71ea27] hover:bg-[#71ea27]/80 text-[#0a473a] font-semibold py-3 px-8 rounded-full transition-colors duration-300">
+              Get a Copy
             </button>
           </motion.div>
 

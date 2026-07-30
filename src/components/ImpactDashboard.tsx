@@ -25,7 +25,10 @@ export default function ImpactDashboard() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-green-500/10 blur-[100px] rounded-full" />
           
           <div className="relative z-10">
-            <h2 className="text-3xl font-serif font-bold tracking-wider mb-12 text-center text-green-300">LIVE IMPACT DASHBOARD</h2>
+            <h2 className="text-3xl font-serif font-bold tracking-wider mb-12 text-center text-green-300">
+              LIVE IMPACT DASHBOARD
+              <span className="block text-lg font-normal text-gray-300 mt-2 tracking-normal">(Help the numbers grow)</span>
+            </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               <div className="flex flex-col items-center text-center">
@@ -38,7 +41,7 @@ export default function ImpactDashboard() {
                   animate={{ opacity: 1, scale: 1 }}
                   className="text-4xl font-bold mb-2 font-serif"
                 >
-                  {24500 + trees}
+                  {trees}
                 </motion.span>
                 <p className="text-sm tracking-widest text-gray-400 uppercase">Trees Planted</p>
               </div>
@@ -47,7 +50,7 @@ export default function ImpactDashboard() {
                 <div className="w-16 h-16 rounded-full glass-panel flex items-center justify-center mb-6 border-blue-500/30">
                   <Baby className="w-8 h-8 text-blue-400" />
                 </div>
-                <span className="text-4xl font-bold mb-2 font-serif">12,450</span>
+                <span className="text-4xl font-bold mb-2 font-serif">1000</span>
                 <p className="text-sm tracking-widest text-gray-400 uppercase">Children Reached</p>
               </div>
 
