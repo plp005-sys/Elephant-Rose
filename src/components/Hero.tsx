@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import heroBg from '../assets/images/acacia-tree-featured-1024x605.jpg';
 import cardImg1 from '../assets/images/regenerated_image_1785448799308.jpg';
 import cardImg2 from '../assets/images/regenerated_image_1785449435958.png';
@@ -25,11 +26,11 @@ export default function Hero() {
             <span className="text-[#71ea27]">Big Impact</span>
           </h1>
           <p className="text-lg text-gray-300 mb-10 max-w-md italic">
-            "A noble plan once recorded never dies, but will live on long after we are gone"
+            "forgiving the unforgivable, and loving even the unlovable"
           </p>
-          <a href="#about" className="inline-block bg-[#bce3a5] text-green-900 font-bold px-8 py-3 rounded-full text-sm hover:bg-[#a6d18f] transition-all duration-300">
+          <Link to="/about" className="inline-block bg-[#bce3a5] text-green-900 font-bold px-8 py-3 rounded-full text-sm hover:bg-[#a6d18f] transition-all duration-300">
             Our Approach
-          </a>
+          </Link>
         </motion.div>
 
         <motion.div 
@@ -85,8 +86,16 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.6 + idx * 0.2 }}
             className={`glass-panel p-8 flex flex-col items-center text-center transition-colors duration-300 ${card.bg} ${card.border}`}
           >
-            <div className="w-full h-48 rounded-2xl overflow-hidden mb-6 relative shadow-lg">
-               <img src={card.img} alt={card.title} className={`w-full h-full object-cover transition-transform duration-500 hover:scale-110 ${card.imgClass}`} />
+            <div className="w-full h-48 rounded-2xl overflow-hidden mb-6 relative shadow-lg bg-emerald-950/40">
+               <img 
+                 src={card.img} 
+                 alt={card.title} 
+                 loading="lazy"
+                 decoding="async"
+                 width={500}
+                 height={300}
+                 className={`w-full h-full object-cover transition-transform duration-500 hover:scale-110 ${card.imgClass}`} 
+               />
             </div>
             <h3 className="text-xl font-bold mb-2 text-white">{card.title}</h3>
             <p className="text-sm text-gray-400">{card.desc}</p>

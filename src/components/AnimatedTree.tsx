@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
+import PlantInfoCard from './PlantInfoCard';
 
 export default function AnimatedTree() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -9,26 +10,26 @@ export default function AnimatedTree() {
   });
 
   // Grow the tree trunk
-  const trunkHeight = useTransform(scrollYProgress, [0.2, 0.5], ["0%", "100%"]);
+  const trunkHeight = useTransform(scrollYProgress, [0.1, 0.3], ["0%", "100%"]);
   
   // Show branches sequentially
-  const branch1Opacity = useTransform(scrollYProgress, [0.4, 0.5], [0, 1]);
-  const branch1Scale = useTransform(scrollYProgress, [0.4, 0.5], [0, 1]);
+  const branch1Opacity = useTransform(scrollYProgress, [0.2, 0.3], [0, 1]);
+  const branch1Scale = useTransform(scrollYProgress, [0.2, 0.3], [0, 1]);
   
-  const branch2Opacity = useTransform(scrollYProgress, [0.5, 0.6], [0, 1]);
-  const branch2Scale = useTransform(scrollYProgress, [0.5, 0.6], [0, 1]);
+  const branch2Opacity = useTransform(scrollYProgress, [0.3, 0.4], [0, 1]);
+  const branch2Scale = useTransform(scrollYProgress, [0.3, 0.4], [0, 1]);
   
-  const branch3Opacity = useTransform(scrollYProgress, [0.6, 0.7], [0, 1]);
-  const branch3Scale = useTransform(scrollYProgress, [0.6, 0.7], [0, 1]);
+  const branch3Opacity = useTransform(scrollYProgress, [0.4, 0.5], [0, 1]);
+  const branch3Scale = useTransform(scrollYProgress, [0.4, 0.5], [0, 1]);
 
   return (
-    <section ref={containerRef} className="py-32 px-6 relative z-10 min-h-[80vh] flex flex-col items-center justify-center">
+    <section ref={containerRef} className="py-32 px-6 relative z-10 min-h-[80vh] flex flex-col items-center justify-center overflow-hidden">
       <div className="text-center mb-24 max-w-2xl mx-auto">
         <h2 className="text-3xl font-serif font-bold tracking-wider mb-6 text-green-300">OUR GROWING COMMITMENT</h2>
         <p className="text-gray-400">As you scroll, witness our commitment to the environment grow. Every plant purchased contributes to a greener planet.</p>
       </div>
 
-      <div className="relative h-[400px] w-full max-w-[300px] mx-auto flex justify-center">
+      <div className="relative h-[400px] w-4 mx-auto flex justify-center">
         {/* Trunk */}
         <motion.div 
           className="w-4 bg-gradient-to-t from-orange-900 to-green-900 rounded-full absolute bottom-0 origin-bottom"
@@ -37,7 +38,7 @@ export default function AnimatedTree() {
 
         {/* Branch 1 (Left) */}
         <motion.div 
-          className="absolute bottom-32 -left-16 origin-bottom-right"
+          className="absolute bottom-32 right-1/2 origin-bottom-right"
           style={{ opacity: branch1Opacity, scale: branch1Scale }}
         >
           <svg width="100" height="80" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +55,7 @@ export default function AnimatedTree() {
 
         {/* Branch 2 (Right) */}
         <motion.div 
-          className="absolute bottom-48 -right-20 origin-bottom-left"
+          className="absolute bottom-48 left-1/2 origin-bottom-left z-20"
           style={{ opacity: branch2Opacity, scale: branch2Scale }}
         >
           <svg width="120" height="90" viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,11 +68,14 @@ export default function AnimatedTree() {
               </linearGradient>
             </defs>
           </svg>
+          <div className="absolute left-[120px] md:left-[140px] lg:left-[160px] -bottom-[20px] md:-bottom-[60px] lg:-bottom-[140px] transform origin-bottom-left scale-[0.4] md:scale-[0.45] lg:scale-[0.65]">
+            <PlantInfoCard />
+          </div>
         </motion.div>
 
         {/* Branch 3 (Top Left) */}
         <motion.div 
-          className="absolute bottom-64 -left-12 origin-bottom-right"
+          className="absolute bottom-64 right-1/2 origin-bottom-right"
           style={{ opacity: branch3Opacity, scale: branch3Scale }}
         >
           <svg width="80" height="60" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -88,7 +92,7 @@ export default function AnimatedTree() {
         
         {/* Top Canopy */}
         <motion.div
-          className="absolute top-0 w-32 h-32 bg-green-500/40 rounded-full blur-2xl origin-bottom"
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-green-500/40 rounded-full blur-2xl origin-bottom"
           style={{ opacity: branch3Opacity, scale: branch3Scale }}
         />
       </div>

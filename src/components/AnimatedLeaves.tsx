@@ -21,6 +21,7 @@ const AnimatedLeaf = ({
   mouseX, 
   mouseY 
 }: { 
+  key?: string;
   leaf: { id: number; x: number; delay: number; duration: number }; 
   mouseX: MotionValue<number>; 
   mouseY: MotionValue<number>; 

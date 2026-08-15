@@ -1,15 +1,15 @@
 import { motion } from 'motion/react';
 
 const plants = [
-  { name: "AUCUBA", price: "20.99 $", image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" },
-  { name: "DRACAENA", price: "19.99 $", image: "https://images.unsplash.com/photo-1597055905081-8b01056502ba?auto=format&fit=crop&w=400&q=80" },
-  { name: "AGLAONEMA SILVER", price: "14.99 $", image: "https://images.unsplash.com/photo-1616843798939-c5cce4ec48ab?auto=format&fit=crop&w=400&q=80" },
-  { name: "CALLA", price: "11.99 $", image: "https://images.unsplash.com/photo-1600411833196-1c731a29ed01?auto=format&fit=crop&w=400&q=80" },
-  { name: "ASPLENIUM", price: "13.99 $", image: "https://images.unsplash.com/photo-1598880940080-c9a9c20a9bc4?auto=format&fit=crop&w=400&q=80" },
-  { name: "CORDILLINA KIWI", price: "19.99 $", image: "https://images.unsplash.com/photo-1613739118925-cde1e8f5d65b?auto=format&fit=crop&w=400&q=80" },
-  { name: "KALATEA ZEBRINA", price: "20.99 $", image: "https://images.unsplash.com/photo-1611211232932-da3113c5b960?auto=format&fit=crop&w=400&q=80" },
-  { name: "FATSIA JAPONICA", price: "15.99 $", image: "https://images.unsplash.com/photo-1599598425947-33002621ec6b?auto=format&fit=crop&w=400&q=80" },
-  { name: "CALATHEA", price: "11.99 $", image: "https://images.unsplash.com/photo-1595053982937-56e6d1acbdde?auto=format&fit=crop&w=400&q=80" }
+  { name: "Community Engagement", price: "20.99 $", image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" },
+  { name: "DRACAENA", price: "19.99 $", image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" },
+  { name: "AGLAONEMA SILVER", price: "14.99 $", image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" },
+  { name: "CALLA", price: "11.99 $", image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" },
+  { name: "ASPLENIUM", price: "13.99 $", image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" },
+  { name: "CORDILLINA KIWI", price: "19.99 $", image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" },
+  { name: "KALATEA ZEBRINA", price: "20.99 $", image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" },
+  { name: "FATSIA JAPONICA", price: "15.99 $", image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" },
+  { name: "CALATHEA", price: "11.99 $", image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" }
 ];
 
 export default function Catalog() {
@@ -59,10 +59,6 @@ export default function Catalog() {
               </div>
               <h3 className="text-lg tracking-widest uppercase mb-2 font-medium">{plant.name}</h3>
               <p className="text-xs text-gray-400 mb-4 text-center">A brief description of this plant, etc.</p>
-              <span className="text-xl font-medium mb-6 text-green-300">{plant.price}</span>
-              <button className="glass-button w-full py-3 rounded-full text-sm uppercase tracking-wider">
-                Buy it now
-              </button>
             </motion.div>
           ))}
         </div>

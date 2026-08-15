@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { Video, Users, Tent, HandHeart } from 'lucide-react';
+import { Video, Users, Tent, HandHeart, ArrowRight, HeartHandshake } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import AnimatedLeaves from '../components/AnimatedLeaves';
@@ -37,7 +38,7 @@ export default function AboutUs() {
                 className="text-3xl md:text-4xl text-[#71ea27] mb-8 tracking-wide"
                 style={{ fontFamily: "'Caveat', cursive" }}
               >
-                "To forgive the unforgivable, and loving even the unlovable"
+                "forgiving the unforgivable, and loving even the unlovable"
               </p>
               <div className="w-24 h-1 bg-[#71ea27]/50 mx-auto rounded-full mb-8"></div>
               <p className="text-lg md:text-xl text-white/80 leading-relaxed max-w-3xl mx-auto">
@@ -60,7 +61,7 @@ export default function AboutUs() {
                 { icon: Video, title: "Cinema", desc: "Using the power of visual storytelling to inspire environmental stewardship." },
                 { icon: Users, title: "Seminars", desc: "Engaging communities and experts to share knowledge and conservation strategies." },
                 { icon: Tent, title: "Outreach", desc: "Hands-on projects and field education connecting youth directly with nature." },
-                { icon: HandHeart, title: "Fundraisers", desc: "Mobilizing resources to sustain critical wildlife and habitat protection efforts." }
+                { icon: HandHeart, title: "Fundraisers", desc: "Mobilizing resources to sustain environmental education and all critical wildlife and habitat protection efforts." }
               ].map((item, i) => (
                 <motion.div
                   key={item.title}
@@ -113,6 +114,30 @@ export default function AboutUs() {
                 </p>
               </motion.div>
             </div>
+
+            {/* CTA Button beneath all cards */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mt-16 text-center flex flex-col sm:flex-row items-center justify-center gap-4"
+            >
+              <Link
+                to="/contact#get-in-touch"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#71ea27] text-[#0a2312] font-bold text-base md:text-lg transition-all duration-300 hover:bg-[#85f63d] hover:shadow-[0_0_25px_rgba(113,234,39,0.45)] hover:scale-[1.03] active:scale-[0.98]"
+              >
+                <span>Get In Touch</span>
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <Link
+                to="/contact#donate"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-white/10 border border-white/25 text-white font-bold text-base md:text-lg backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:border-[#71ea27] hover:text-[#71ea27] hover:scale-[1.03] active:scale-[0.98]"
+              >
+                <HeartHandshake className="w-5 h-5 text-[#71ea27]" />
+                <span>Support Our Mission</span>
+              </Link>
+            </motion.div>
           </div>
         </section>
       </main>

@@ -38,6 +38,17 @@ export default function Contact() {
           element.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
+    } else if (location.hash === '#get-in-touch') {
+      setTimeout(() => {
+        const element = document.getElementById('get-in-touch');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [location]);
 
@@ -67,7 +78,7 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h1 className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight">Get in Touch</h1>
+            <h1 id="get-in-touch" className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight scroll-mt-32">Get in Touch</h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Have questions about our initiatives or want to get involved? We'd love to hear from you.
             </p>
