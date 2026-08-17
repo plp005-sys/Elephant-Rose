@@ -1,14 +1,12 @@
-import { lazy, Suspense } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import AnimatedLeaves from '../components/AnimatedLeaves';
-
-const AboutSection = lazy(() => import('../components/AboutSection'));
-const Footer = lazy(() => import('../components/Footer'));
-const ImpactDashboard = lazy(() => import('../components/ImpactDashboard'));
-const RebuildingSection = lazy(() => import('../components/RebuildingSection'));
-const SpotlightSection = lazy(() => import('../components/SpotlightSection'));
-const VideoSection = lazy(() => import('../components/VideoSection'));
+import AboutSection from '../components/AboutSection';
+import ImpactDashboard from '../components/ImpactDashboard';
+import RebuildingSection from '../components/RebuildingSection';
+import SpotlightSection from '../components/SpotlightSection';
+import VideoSection from '../components/VideoSection';
+import Footer from '../components/Footer';
 
 export default function Home() {
   return (
@@ -19,17 +17,13 @@ export default function Home() {
       
       <main>
         <Hero />
-        <Suspense fallback={<div className="h-24" />}>
-          <AboutSection />
-          <ImpactDashboard />
-          <RebuildingSection />
-          <SpotlightSection />
-          <VideoSection />
-        </Suspense>
+        <AboutSection />
+        <ImpactDashboard />
+        <RebuildingSection />
+        <SpotlightSection />
+        <VideoSection />
       </main>
-      <Suspense fallback={<div className="h-24" />}>
-        <Footer />
-      </Suspense>
+      <Footer />
     </div>
   );
 }

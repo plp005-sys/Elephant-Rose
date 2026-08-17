@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { ChevronLeft, ChevronRight, Play, X, Image as ImageIcon } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Play, X, Image as ImageIcon, CheckCircle2, Upload, Trash2, Plus } from 'lucide-react';
+import { loadGalleryTemplatesFromDB, saveGalleryTemplatesToDB } from '../utils/galleryStorage';
 import galleryBgImage from '../assets/images/ChatGPT Image Jul 22, 2026, 05_30_15 PM.jpg';
 import cinemaBgImage from '../assets/images/ChatGPT Image Jul 29, 2026, 12_28_28 PM.jpg';
 import mainBgImage from '../assets/images/ChatGPT Image Jul 29, 2026, 12_50_35 PM.png';
@@ -18,7 +19,28 @@ import outreachImg8 from '../assets/images/IMG_8181.jpg';
 import outreachImg9 from '../assets/images/IMG_8191.jpg';
 import outreachImg10 from '../assets/images/IMG_8271.jpg';
 
-const templates = [
+import fundraiserImg1 from '../assets/images/IMG_0032.jpg';
+import fundraiserImg2 from '../assets/images/IMG_0033.jpg';
+import fundraiserImg3 from '../assets/images/IMG_0034.jpg';
+import fundraiserImg4 from '../assets/images/IMG_0037.jpg';
+import fundraiserImg5 from '../assets/images/IMG_0051.jpg';
+import fundraiserImg6 from '../assets/images/IMG_0059.jpg';
+import fundraiserImg7 from '../assets/images/IMG_0062.jpg';
+import fundraiserImg8 from '../assets/images/IMG_0063.jpg';
+import fundraiserImg9 from '../assets/images/IMG_0064.jpg';
+import fundraiserImg10 from '../assets/images/IMG_0065.jpg';
+import fundraiserImg11 from '../assets/images/IMG_1852.jpg';
+import fundraiserImg12 from '../assets/images/_MG_3559.jpg';
+
+interface GalleryTemplate {
+  id: string;
+  title: string;
+  galleryTitle: string;
+  thumb: string;
+  images: string[];
+}
+
+const initialTemplates: GalleryTemplate[] = [
   {
     id: 'outreach',
     title: 'Outreach',
@@ -41,30 +63,35 @@ const templates = [
     id: 'fundraisers',
     title: 'Fundraisers',
     galleryTitle: 'Fundraisers',
-    thumb: '',
-    images: [] as string[]
+    thumb: fundraiserImg1,
+    images: [
+      fundraiserImg1,
+      fundraiserImg2,
+      fundraiserImg3,
+      fundraiserImg4,
+      fundraiserImg5,
+      fundraiserImg6,
+      fundraiserImg7,
+      fundraiserImg8,
+      fundraiserImg9,
+      fundraiserImg10,
+      fundraiserImg11,
+      fundraiserImg12,
+    ]
   },
   {
     id: 'photo',
-    title: 'Photo Shoots',
-    galleryTitle: 'Portrait Portfolio',
-    thumb: 'https://images.unsplash.com/photo-1516280440514-679800812573?auto=format&fit=crop&w=300&q=80',
-    images: [
-      'https://images.unsplash.com/photo-1516280440514-679800812573?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80',
-    ]
+    title: 'Filming',
+    galleryTitle: 'Filming',
+    thumb: '',
+    images: []
   },
   {
     id: 'wedding',
     title: 'Wedding Photographer',
-    galleryTitle: 'Special Moments',
-    thumb: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=300&q=80',
-    images: [
-      'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80',
-    ]
+    galleryTitle: 'Wedding Photographer',
+    thumb: '',
+    images: []
   }
 ];
 
@@ -93,9 +120,52 @@ const cinemaVideos = [
 ];
 
 export default function Features() {
-  const [activeTemplate, setActiveTemplate] = useState(templates[0]);
+  const [templates, setTemplates] = useState<GalleryTemplate[]>(initialTemplates);
+  const [activeTemplateId, setActiveTemplateId] = useState<string>(initialTemplates[0].id);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [playingVideoId, setPlayingVideoId] = useState<number | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isSaved, setIsSaved] = useState(true);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Load from IndexedDB on initial mount
+  useEffect(() => {
+    let isMounted = true;
+    loadGalleryTemplatesFromDB().then((saved) => {
+      if (isMounted && saved && Array.isArray(saved) && saved.length > 0) {
+        // Merge with initialTemplates to ensure updated titles and built-in template images take effect
+        const merged = initialTemplates.map((initT) => {
+          const found = saved.find((s: GalleryTemplate) => s.id === initT.id);
+          if (found) {
+            const hasSavedImages = found.images && found.images.length > 0;
+            const images = hasSavedImages ? found.images : initT.images;
+            const thumb = (found.thumb && found.thumb.length > 0) ? found.thumb : (initT.thumb || (images.length > 0 ? images[0] : ''));
+            return {
+              ...found,
+              title: initT.title,
+              galleryTitle: initT.galleryTitle,
+              images,
+              thumb,
+            };
+          }
+          return initT;
+        });
+        setTemplates(merged);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // Sync activeTemplate object with current state in templates array
+  const activeTemplate = templates.find(t => t.id === activeTemplateId) || templates[0];
+
+  useEffect(() => {
+    saveGalleryTemplatesToDB(templates).then(() => {
+      setIsSaved(true);
+    });
+  }, [templates]);
 
   useEffect(() => {
     if (!activeTemplate.images || activeTemplate.images.length <= 1) return;
@@ -115,6 +185,70 @@ export default function Features() {
   const handlePrevImage = () => {
     if (!activeTemplate.images || activeTemplate.images.length === 0) return;
     setCurrentImageIndex((prev) => (prev - 1 + activeTemplate.images.length) % activeTemplate.images.length);
+  };
+
+  const handleFilesSelected = (files: FileList | null) => {
+    if (!files || files.length === 0) return;
+
+    const fileArray = Array.from(files);
+    const readPromises = fileArray.map(file => {
+      return new Promise<string>((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          if (e.target?.result) {
+            resolve(e.target.result as string);
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+
+    Promise.all(readPromises).then(newImages => {
+      setTemplates(prevTemplates => {
+        return prevTemplates.map(t => {
+          if (t.id === activeTemplate.id) {
+            const combinedImages = [...t.images, ...newImages];
+            return {
+              ...t,
+              images: combinedImages,
+              thumb: t.thumb || combinedImages[0] || ''
+            };
+          }
+          return t;
+        });
+      });
+      setCurrentImageIndex(0);
+    });
+  };
+
+  const handleClearGallery = (templateId: string) => {
+    setTemplates(prev => prev.map(t => {
+      if (t.id === templateId) {
+        return {
+          ...t,
+          images: [],
+          thumb: ''
+        };
+      }
+      return t;
+    }));
+    setCurrentImageIndex(0);
+  };
+
+  const handleDeleteCurrentImage = () => {
+    if (!activeTemplate.images || activeTemplate.images.length === 0) return;
+    setTemplates(prev => prev.map(t => {
+      if (t.id === activeTemplate.id) {
+        const filtered = t.images.filter((_, idx) => idx !== currentImageIndex);
+        return {
+          ...t,
+          images: filtered,
+          thumb: filtered[0] || ''
+        };
+      }
+      return t;
+    }));
+    setCurrentImageIndex(0);
   };
 
   return (
@@ -139,6 +273,19 @@ export default function Features() {
             backgroundPosition: 'center'
           }}
         >
+          {/* Hidden File Input */}
+          <input 
+            type="file" 
+            ref={fileInputRef} 
+            multiple 
+            accept="image/*" 
+            className="hidden" 
+            onChange={(e) => {
+              handleFilesSelected(e.target.files);
+              if (e.target) e.target.value = '';
+            }}
+          />
+
           {/* Dark overlay for readability */}
           <div className="absolute inset-0 bg-black/40"></div>
           
@@ -159,7 +306,7 @@ export default function Features() {
                     <div 
                       key={template.id}
                       onClick={() => {
-                        setActiveTemplate(template);
+                        setActiveTemplateId(template.id);
                         setCurrentImageIndex(0);
                       }}
                       className="cursor-pointer group flex flex-col items-center gap-3 relative"
@@ -192,6 +339,13 @@ export default function Features() {
                             </svg>
                           </div>
                         )}
+
+                        {/* Image count pill */}
+                        {template.images && template.images.length > 0 && (
+                          <div className="absolute bottom-1.5 right-1.5 px-1.5 py-0.5 rounded-full bg-black/70 backdrop-blur-sm text-[9px] font-semibold text-[#71ea27]">
+                            {template.images.length}
+                          </div>
+                        )}
                       </div>
                       <span className={`text-xs text-center font-medium transition-colors ${activeTemplate.id === template.id ? 'text-white' : 'text-gray-400 group-hover:text-gray-200'}`}>
                         {template.title}
@@ -203,9 +357,25 @@ export default function Features() {
 
               {/* Main Gallery */}
               <div className="w-full lg:w-[calc(100%-280px-2rem)] flex flex-col bg-black p-6 rounded-2xl relative overflow-hidden">
-                <h2 className="text-3xl mb-8 font-medium text-center">{activeTemplate.galleryTitle}</h2>
+                <div className="flex items-center justify-between gap-4 mb-6 border-b border-white/10 pb-4">
+                  <h2 className="text-2xl sm:text-3xl font-medium">{activeTemplate.galleryTitle}</h2>
+                </div>
                 
-                <div className="relative w-full flex-grow flex items-center justify-center rounded-xl overflow-hidden min-h-[400px]">
+                <div 
+                  onDragOver={(e) => {
+                    e.preventDefault();
+                    setIsDragging(true);
+                  }}
+                  onDragLeave={() => setIsDragging(false)}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    setIsDragging(false);
+                    handleFilesSelected(e.dataTransfer.files);
+                  }}
+                  className={`relative w-full flex-grow flex items-center justify-center rounded-xl overflow-hidden min-h-[400px] transition-all duration-300 ${
+                    isDragging ? 'border-2 border-dashed border-[#71ea27] bg-[#71ea27]/5' : ''
+                  }`}
+                >
                   {activeTemplate.images && activeTemplate.images.length > 0 ? (
                     <>
                       <AnimatePresence mode="wait">
@@ -242,28 +412,39 @@ export default function Features() {
                       )}
                     </>
                   ) : (
-                    <div className="flex flex-col items-center justify-center py-20 px-6 text-center border-2 border-dashed border-white/10 rounded-2xl w-full max-w-md mx-auto bg-white/5 backdrop-blur-sm">
-                      <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-4 text-gray-400">
-                        <ImageIcon size={30} />
+                    <div 
+                      onClick={() => fileInputRef.current?.click()}
+                      className="cursor-pointer flex flex-col items-center justify-center py-16 px-6 text-center border-2 border-dashed border-white/15 hover:border-[#71ea27]/50 rounded-2xl w-full max-w-lg mx-auto bg-white/5 hover:bg-white/[0.08] transition-all group"
+                    >
+                      <div className="w-16 h-16 rounded-full bg-[#71ea27]/10 border border-[#71ea27]/20 flex items-center justify-center mb-4 text-[#71ea27] group-hover:scale-110 transition-transform">
+                        <Upload size={28} />
                       </div>
-                      <h3 className="text-xl font-semibold text-white mb-2">{activeTemplate.title} Gallery is Blank</h3>
-                      <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
-                        Images for this category are cleared and ready for your new uploads.
+                      <h3 className="text-xl font-semibold text-white mb-2">{activeTemplate.title} Gallery is Ready</h3>
+                      <p className="text-gray-300 text-sm leading-relaxed max-w-xs mb-5">
+                        Drag and drop your 12 images here, or click to browse from your device.
                       </p>
+                      <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#71ea27] text-[#0a2312] shadow-lg group-hover:bg-[#85f63d] transition-all">
+                        <Plus size={16} />
+                        <span>Select 12 Photos</span>
+                      </span>
                     </div>
                   )}
                 </div>
                 
                 {/* Thumbnails indicator */}
                 {activeTemplate.images && activeTemplate.images.length > 0 && (
-                  <div className="flex justify-center gap-2 mt-6">
-                    {activeTemplate.images.map((_, idx) => (
+                  <div className="flex flex-wrap justify-center gap-2 mt-6">
+                    {activeTemplate.images.map((img, idx) => (
                       <button 
                         key={idx} 
                         onClick={() => setCurrentImageIndex(idx)}
-                        className={`h-2 rounded-full transition-all duration-300 ${idx === currentImageIndex ? 'w-8 bg-[#71ea27]' : 'w-2 bg-gray-600 hover:bg-gray-400'}`}
+                        className={`h-10 w-14 rounded-md overflow-hidden border-2 transition-all duration-300 ${
+                          idx === currentImageIndex ? 'border-[#71ea27] scale-105 shadow-[0_0_10px_rgba(113,234,39,0.4)]' : 'border-white/20 opacity-60 hover:opacity-100'
+                        }`}
                         aria-label={`Go to image ${idx + 1}`}
-                      />
+                      >
+                        <img src={img} alt={`Thumb ${idx + 1}`} className="w-full h-full object-cover" />
+                      </button>
                     ))}
                   </div>
                 )}
