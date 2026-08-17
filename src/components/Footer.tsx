@@ -18,14 +18,22 @@ export default function Footer() {
                 <MapPin className="w-5 h-5 text-[#71ea27] shrink-0 mt-0.5" />
                 <p>SkyGold Estate, 01 DRC Govera Village Domboshava, Goromonzi Rural District.</p>
               </div>
-              <div className="flex items-center gap-3">
-                <MessageCircle className="w-5 h-5 text-[#71ea27] shrink-0" />
+              <a 
+                href="https://wa.me/263772112011" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center gap-3 text-gray-300 hover:text-[#71ea27] transition-colors group"
+              >
+                <MessageCircle className="w-5 h-5 text-[#71ea27] shrink-0 group-hover:scale-110 transition-transform" />
                 <p>+263 77 211 2011</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-[#71ea27] shrink-0" />
+              </a>
+              <a 
+                href="mailto:elephantrose@gmail.com" 
+                className="flex items-center gap-3 text-gray-300 hover:text-[#71ea27] transition-colors group"
+              >
+                <Mail className="w-5 h-5 text-[#71ea27] shrink-0 group-hover:scale-110 transition-transform" />
                 <p>elephantrose@gmail.com</p>
-              </div>
+              </a>
             </div>
           </div>
         </div>

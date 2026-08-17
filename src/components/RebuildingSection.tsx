@@ -60,10 +60,8 @@ export default function RebuildingSection() {
                   </p>
                   <div className="flex justify-center">
                     <a 
-                      href="https://www.youtube.com/watch?v=WXhMy0AcLBs"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block bg-[#c60c91] hover:bg-[#a10a76] text-white font-bold py-2.5 px-8 rounded-full transition-colors duration-300"
+                      href="/our-work#borehole-project"
+                      className="inline-block bg-[#c60c91] hover:bg-[#a10a76] text-white font-bold py-2.5 px-8 rounded-full transition-colors duration-300 shadow-md hover:shadow-lg"
                     >
                       View More
                     </a>
@@ -117,10 +115,8 @@ export default function RebuildingSection() {
                   </p>
                   <div className="flex justify-center">
                     <a 
-                      href="https://www.youtube.com/watch?v=WXhMy0AcLBs"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block bg-[#c60c91] hover:bg-[#a10a76] text-white font-bold py-2.5 px-8 rounded-full transition-colors duration-300"
+                      href="/our-work#environmental-education"
+                      className="inline-block bg-[#c60c91] hover:bg-[#a10a76] text-white font-bold py-2.5 px-8 rounded-full transition-colors duration-300 shadow-md hover:shadow-lg"
                     >
                       View More
                     </a>

@@ -32,6 +32,29 @@ import fundraiserImg10 from '../assets/images/IMG_0065.jpg';
 import fundraiserImg11 from '../assets/images/IMG_1852.jpg';
 import fundraiserImg12 from '../assets/images/_MG_3559.jpg';
 
+import filmingImg1 from '../assets/images/IMG_4640.jpg';
+import filmingImg2 from '../assets/images/IMG_5967-1.jpg';
+import filmingImg3 from '../assets/images/IMG_7617.jpg';
+import filmingImg4 from '../assets/images/IMG_7691.jpg';
+import filmingImg5 from '../assets/images/IMG_7760.jpg';
+import filmingImg6 from '../assets/images/IMG_7969.jpg';
+import filmingImg7 from '../assets/images/IMG_8196.jpg';
+import filmingImg8 from '../assets/images/IMG_9049.jpg';
+import filmingImg9 from '../assets/images/IMG_9067.jpg';
+import filmingImg10 from '../assets/images/Sunset POSTER.jpg';
+
+import rTeamImg1 from '../assets/images/jpeg-optimizer_IMG_1673.JPG';
+import rTeamImg2 from '../assets/images/jpeg-optimizer_IMG_1699.JPG';
+import rTeamImg3 from '../assets/images/jpeg-optimizer_IMG_5761.JPG';
+import rTeamImg4 from '../assets/images/jpeg-optimizer_IMG_5791.jpg';
+import rTeamImg5 from '../assets/images/jpeg-optimizer_IMG_5871.jpg';
+import rTeamImg6 from '../assets/images/jpeg-optimizer_IMG_5907.JPG';
+import rTeamImg7 from '../assets/images/jpeg-optimizer_IMG_7740.JPG';
+import rTeamImg8 from '../assets/images/jpeg-optimizer_IMG_7769.JPG';
+import rTeamImg9 from '../assets/images/jpeg-optimizer_IMG_7998.JPG';
+import rTeamImg10 from '../assets/images/jpeg-optimizer_IMG_8078.JPG';
+import rTeamImg11 from '../assets/images/jpeg-optimizer_IMG_9059.JPG';
+
 interface GalleryTemplate {
   id: string;
   title: string;
@@ -83,15 +106,38 @@ const initialTemplates: GalleryTemplate[] = [
     id: 'photo',
     title: 'Filming',
     galleryTitle: 'Filming',
-    thumb: '',
-    images: []
+    thumb: filmingImg1,
+    images: [
+      filmingImg1,
+      filmingImg2,
+      filmingImg3,
+      filmingImg4,
+      filmingImg5,
+      filmingImg6,
+      filmingImg7,
+      filmingImg8,
+      filmingImg9,
+      filmingImg10,
+    ]
   },
   {
     id: 'wedding',
-    title: 'Wedding Photographer',
-    galleryTitle: 'Wedding Photographer',
-    thumb: '',
-    images: []
+    title: 'The R-Team',
+    galleryTitle: 'The R-Team',
+    thumb: rTeamImg1,
+    images: [
+      rTeamImg1,
+      rTeamImg2,
+      rTeamImg3,
+      rTeamImg4,
+      rTeamImg5,
+      rTeamImg6,
+      rTeamImg7,
+      rTeamImg8,
+      rTeamImg9,
+      rTeamImg10,
+      rTeamImg11,
+    ]
   }
 ];
 
