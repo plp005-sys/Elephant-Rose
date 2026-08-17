@@ -74,16 +74,16 @@ const educationScenarios = [
   },
   {
     id: 'classroom-documentaries',
-    badge: '2D Cinema & Visual Literacy',
+    badge: 'Visual Literacy & Inspiration',
     badgeIcon: Tv,
-    title: '2D Cinema',
-    context: 'Students in remote school classrooms engrossed in 2D cinema screenings of wildlife and conservation documentaries, broadening their ecological perspective.',
+    title: 'Documentaries & Eco-Science Learning',
+    context: 'Students in remote school classrooms engrossed in wildlife and conservation films, broadening their ecological perspective.',
     image: studentsClassroomNature,
-    imageAlt: 'Rural African students in a 2D cinema classroom watching an inspiring wildlife documentary on a screen',
+    imageAlt: 'Rural African students in a classroom watching an inspiring wildlife documentary on a screen',
     advantages: [
       {
         title: 'Bridging the Rural Knowledge Gap',
-        desc: 'Delivers high-quality ecological media and global conservation insights to children in under-resourced remote schools through 2D cinema.'
+        desc: 'Delivers high-quality ecological media and global conservation insights to children in under-resourced remote schools.'
       },
       {
         title: 'Inspiring Green Careers',
