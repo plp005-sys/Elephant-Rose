@@ -1,3 +1,5 @@
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -105,6 +107,22 @@ const educationScenarios = [
 ];
 
 export default function OurWork() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const hash = location.hash.replace('#', '');
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 150);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [location]);
+
   return (
     <div className="min-h-screen text-white font-sans overflow-x-hidden relative flex flex-col">
       {/* Background Image */}
@@ -148,7 +166,7 @@ export default function OurWork() {
                 <span className="drop-shadow-sm">Featured Project • In Progress</span>
               </div>
               <div className="text-xs font-semibold tracking-widest uppercase text-white/80 drop-shadow-sm bg-black/30 px-3.5 py-1.5 rounded-full border border-white/10">
-                SkyGold Estate • Domboshava, Goromonzi
+                SkyGold Estate • Domboshava
               </div>
             </div>
 
@@ -177,9 +195,6 @@ export default function OurWork() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4 text-sm text-white drop-shadow-md">
-                    <p className="font-bold text-[#71ea27] text-base">Borehole Drilling in Progress</p>
-                  </div>
                 </div>
 
                 {/* Garden of Peace Sanctuary Image */}
@@ -197,14 +212,14 @@ export default function OurWork() {
                 </div>
 
                 {/* Quick Stats */}
-                <div className="grid grid-cols-2 gap-4 pt-1">
-                  <div className="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-4 text-center shadow-lg">
-                    <span className="text-2xl md:text-3xl font-extrabold text-[#71ea27] block drop-shadow">100%</span>
-                    <span className="text-xs text-white font-medium">Clean Groundwater Source</span>
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-1">
+                  <div className="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-3 sm:p-4 text-center shadow-lg">
+                    <span className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#71ea27] block drop-shadow">100%</span>
+                    <span className="text-[11px] sm:text-xs text-white font-medium leading-tight block mt-0.5">Clean Groundwater Source</span>
                   </div>
-                  <div className="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-4 text-center shadow-lg">
-                    <span className="text-2xl md:text-3xl font-extrabold text-[#71ea27] block drop-shadow">Sanctuary</span>
-                    <span className="text-xs text-white font-medium">Open for Community Retreat</span>
+                  <div className="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-3 sm:p-4 text-center shadow-lg">
+                    <span className="text-lg sm:text-2xl md:text-3xl font-extrabold text-[#71ea27] block drop-shadow tracking-tight">Sanctuary</span>
+                    <span className="text-[11px] sm:text-xs text-white font-medium leading-tight block mt-0.5">Open for Community Retreat</span>
                   </div>
                 </div>
               </div>
@@ -247,17 +262,10 @@ export default function OurWork() {
                 {/* Action Links */}
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <a
-                    href="#green-around-us"
+                    href="/contact#donate"
                     className="inline-flex items-center justify-center gap-2 bg-[#71ea27] hover:bg-[#5ec81e] text-[#111] font-bold py-3.5 px-6 rounded-xl transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(113,234,39,0.3)] text-sm"
                   >
-                    <Sprout className="w-4 h-4" />
-                    Expand: 'Green Around Us'
-                  </a>
-                  <a
-                    href="/contact"
-                    className="inline-flex items-center justify-center gap-2 bg-black/40 hover:bg-black/60 border border-white/25 text-white font-semibold py-3.5 px-6 rounded-xl transition-all text-sm backdrop-blur-sm shadow-md"
-                  >
-                    <HeartHandshake className="w-4 h-4 text-[#71ea27]" />
+                    <HeartHandshake className="w-4 h-4 text-[#0a2312]" />
                     Support This Project
                   </a>
                 </div>
@@ -272,11 +280,8 @@ export default function OurWork() {
                       <Sprout className="w-6 h-6 text-[#0a2312]" />
                     </div>
                     <div>
-                      <h4 className="text-white font-bold text-sm md:text-base flex items-center gap-2">
-                        <span>The 'Green Around Us' Tree Plantation</span>
-                        <span className="text-[10px] uppercase tracking-wider bg-[#71ea27] text-[#0a2312] font-black px-2.5 py-0.5 rounded-full shadow-sm">
-                          Explore Expansion
-                        </span>
+                      <h4 className="text-white font-bold text-sm md:text-base">
+                        The 'Green Around Us' Tree Plantation
                       </h4>
                       <p className="text-white/80 text-xs md:text-sm mt-0.5">
                         Discover how sustainable tree plantations empower communities, restore soil, and fight drought.
@@ -521,7 +526,7 @@ export default function OurWork() {
                 </p>
                 <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
                   <a
-                    href="/contact"
+                    href="/contact#donate"
                     className="inline-flex items-center gap-2 bg-[#71ea27] hover:bg-[#5ec81e] text-[#111] font-bold py-3.5 px-7 rounded-xl transition-all hover:scale-105 shadow-[0_0_20px_rgba(113,234,39,0.3)] text-sm"
                   >
                     <Sprout className="w-4 h-4" />
@@ -603,11 +608,12 @@ export default function OurWork() {
                 return (
                   <motion.div
                     key={scenario.id}
+                    id={scenario.id}
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1, duration: 0.6 }}
-                    className="bg-black/40 backdrop-blur-md border border-white/15 rounded-3xl p-6 md:p-8 shadow-2xl hover:border-white/25 transition-all duration-300"
+                    className="bg-black/40 backdrop-blur-md border border-white/15 rounded-3xl p-6 md:p-8 shadow-2xl hover:border-white/25 transition-all duration-300 scroll-mt-28"
                   >
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                       
@@ -619,17 +625,12 @@ export default function OurWork() {
                             alt={scenario.imageAlt} 
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                           <div className="absolute top-4 left-4">
                             <span className="inline-flex items-center gap-1.5 bg-black/60 backdrop-blur-md border border-white/25 text-[#71ea27] px-3 py-1 rounded-full text-xs font-bold shadow-md">
                               <BadgeIcon className="w-3.5 h-3.5 text-[#71ea27]" />
                               {scenario.badge}
                             </span>
-                          </div>
-                          <div className="absolute bottom-4 left-4 right-4">
-                            <p className="text-white text-sm font-semibold drop-shadow-md">
-                              {scenario.title}
-                            </p>
                           </div>
                         </div>
                       </div>
@@ -692,7 +693,7 @@ export default function OurWork() {
                 </p>
                 <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
                   <a
-                    href="/contact"
+                    href="/contact#donate"
                     className="inline-flex items-center gap-2 bg-[#71ea27] hover:bg-[#5ec81e] text-[#111] font-bold py-3 px-6 rounded-xl transition-all hover:scale-105 shadow-[0_0_20px_rgba(113,234,39,0.3)] text-sm"
                   >
                     <BookOpen className="w-4 h-4" />
@@ -717,7 +718,7 @@ export default function OurWork() {
       </main>
       
       <div className="relative z-10">
-        <Footer />
+        <Footer textWhiteBold />
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import story1 from '../assets/images/boy_holding_seedling_1786047643938.jpg';
 import story2 from '../assets/images/IMG_8157.jpg';
 import story3 from '../assets/images/IMG_7945.jpg';
@@ -10,24 +11,28 @@ const stories = [
     title: 'The Green around us; partnering with schools and communities for  replantation and tree conserving projects.',
     date: 'January 15, 2024',
     image: story1,
+    link: '/our-work#green-around-us',
   },
   {
     id: 2,
     title: 'Environmental Education Outreach',
     date: 'March 5, 2024',
     image: story2,
+    link: '/our-work#environmental-education',
   },
   {
     id: 3,
     title: 'The gentle giant... A touch of friendship',
     date: 'May 20, 2024',
     image: story3,
+    link: '/our-work#wildlife-immersion',
   },
   {
     id: 4,
     title: 'From hearts to hearts - The R-Team.',
     date: 'July 22, 2024',
     image: story4,
+    link: '/about',
   },
 ];
 
@@ -53,28 +58,33 @@ export default function SpotlightSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative h-[280px] rounded-[32px] overflow-hidden block"
+                className="h-[280px] rounded-[32px] overflow-hidden block"
               >
-                {/* Background Image */}
-                <img 
-                  loading="lazy"
-                  decoding="async"
-                  width={600}
-                  height={400}
-                  src={story.image}
-                  alt={story.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 bg-[#0a2e23]"
-                />
-                
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80" />
+                <Link
+                  to={story.link}
+                  className="group relative w-full h-full block rounded-[32px] overflow-hidden focus:outline-none focus:ring-2 focus:ring-[#71ea27]"
+                >
+                  {/* Background Image */}
+                  <img 
+                    loading="lazy"
+                    decoding="async"
+                    width={600}
+                    height={400}
+                    src={story.image}
+                    alt={story.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 bg-[#0a2e23]"
+                  />
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
 
-                {/* Content */}
-                <div className="absolute inset-0 p-6 flex items-end justify-between gap-4">
-                  <h3 className="text-white text-sm md:text-base font-bold leading-tight group-hover:text-[#71ea27] transition-colors duration-300">
-                    {story.title}
-                  </h3>
-                </div>
+                  {/* Content */}
+                  <div className="absolute inset-0 p-6 flex items-end justify-between gap-4">
+                    <h3 className="text-white text-sm md:text-base font-bold leading-tight group-hover:text-[#71ea27] transition-colors duration-300">
+                      {story.title}
+                    </h3>
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </div>
