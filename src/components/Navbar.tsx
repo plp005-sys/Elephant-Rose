@@ -28,12 +28,15 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
-    { name: 'Features', path: '/features' },
+    { name: 'Gallery', path: '/gallery' },
     { name: 'Our Work', path: '/our-work' },
     { name: 'Contact', path: '/contact' },
   ];
 
   const isLinkActive = (path: string) => {
+    if (path === '/gallery') {
+      return location.pathname === '/gallery' || location.pathname === '/features';
+    }
     return location.pathname === path;
   };
 

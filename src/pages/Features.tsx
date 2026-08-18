@@ -151,14 +151,14 @@ const cinemaVideos = [
   },
   {
     id: 2,
-    title: 'Ocean Deep',
+    title: '2D Cinema',
     videoUrl: 'https://www.youtube.com/embed/AbnEOFOdutw?si=Gaj53Ee5ZnyKHdo1',
     poster: 'https://img.youtube.com/vi/AbnEOFOdutw/hqdefault.jpg',
     isYoutube: true
   },
   {
     id: 3,
-    title: 'Forest Life',
+    title: 'Rosie 2D',
     videoUrl: 'https://www.youtube.com/embed/KSHei1YaxCY',
     poster: 'https://img.youtube.com/vi/KSHei1YaxCY/hqdefault.jpg',
     isYoutube: true
@@ -346,7 +346,7 @@ export default function Features() {
               <div className="flex flex-col lg:flex-row gap-8 bg-[#1a1a1a]/80 backdrop-blur-md p-8 rounded-3xl border border-white/10 shadow-2xl">
               {/* Sidebar */}
               <div className="w-full lg:w-[280px] shrink-0">
-                <h3 className="text-sm font-bold uppercase tracking-wider mb-6 text-gray-400 text-center lg:text-left">Select a template to start with</h3>
+                <h3 className="text-sm font-bold uppercase tracking-wider mb-6 text-gray-400 text-center lg:text-left">Select a category</h3>
                 <div className="grid grid-cols-2 lg:grid-cols-2 gap-4">
                   {templates.map(template => (
                     <div 
@@ -499,7 +499,7 @@ export default function Features() {
           </div>
         </section>
 
-        {/* Cinema Sector */}
+        {/* 2D Cinema Sector */}
         <section 
           className="mb-24 relative overflow-hidden py-16 px-6"
           style={{ 

@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { TreePine, Baby, Book, HeartHandshake, Sparkles, ArrowRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
@@ -102,13 +103,13 @@ export default function ImpactDashboard() {
                       </p>
                     </div>
 
-                    <a 
-                      href="mailto:elephantrose@gmail.com?subject=Partnering%20with%20The%20Elephant%20Rose%20Foundation"
+                    <Link 
+                      to="/contact"
                       className="shrink-0 inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl bg-[#71ea27] text-[#050b06] font-bold text-sm md:text-base transition-all duration-300 hover:bg-[#85f63d] hover:shadow-[0_0_20px_rgba(113,234,39,0.5)] hover:scale-[1.02] active:scale-[0.98]"
                     >
                       <span>Connect With Us</span>
                       <ArrowRight className="w-4 h-4" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -17,10 +17,17 @@ import {
   BookOpen, 
   Users2, 
   Sparkles, 
-  Lightbulb 
+  Lightbulb,
+  ArrowDown,
+  ArrowRight,
+  Sun,
+  Wind,
+  Layers,
+  Leaf
 } from 'lucide-react';
 import boreholeRigSunset from '../assets/images/borehole_drilling_sunset_1786998939130.jpg';
 import gardenPeaceSanctuary from '../assets/images/garden_of_peace_sanctuary_1786999773912.jpg';
+import youthTreePlantation from '../assets/images/youth_tree_plantation_1787054475704.jpg';
 import studentsPuttingOutFire from '../assets/images/students_putting_out_fire_1787000710420.jpg';
 import studentsWatchingAnimals from '../assets/images/students_watching_animals_1787000723552.jpg';
 import studentsClassroomNature from '../assets/images/students_classroom_nature_1787000734810.jpg';
@@ -240,25 +247,297 @@ export default function OurWork() {
                 {/* Action Links */}
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <a
-                    href="/contact"
+                    href="#green-around-us"
                     className="inline-flex items-center justify-center gap-2 bg-[#71ea27] hover:bg-[#5ec81e] text-[#111] font-bold py-3.5 px-6 rounded-xl transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(113,234,39,0.3)] text-sm"
                   >
-                    <HeartHandshake className="w-4 h-4" />
-                    Support This Project
+                    <Sprout className="w-4 h-4" />
+                    Expand: 'Green Around Us'
                   </a>
                   <a
-                    href="https://wa.me/263772112011?text=Hello,%20I%20would%20like%20to%20learn%20more%20about%20the%20Rural%20Borehole%20Sinking%20and%20Garden%20of%20Peace%20project."
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/contact"
                     className="inline-flex items-center justify-center gap-2 bg-black/40 hover:bg-black/60 border border-white/25 text-white font-semibold py-3.5 px-6 rounded-xl transition-all text-sm backdrop-blur-sm shadow-md"
                   >
-                    <Compass className="w-4 h-4 text-[#71ea27]" />
-                    Inquire About Visiting
+                    <HeartHandshake className="w-4 h-4 text-[#71ea27]" />
+                    Support This Project
                   </a>
+                </div>
+
+                {/* Interactive Expansion Link Banner to Tree Plantation */}
+                <a
+                  href="#green-around-us"
+                  className="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-2xl bg-[#71ea27]/15 hover:bg-[#71ea27]/25 border border-[#71ea27]/40 text-white transition-all duration-300 group cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(113,234,39,0.25)] block"
+                >
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-11 h-11 rounded-xl bg-[#71ea27] text-black flex items-center justify-center font-bold shrink-0 shadow-md group-hover:scale-110 transition-transform">
+                      <Sprout className="w-6 h-6 text-[#0a2312]" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold text-sm md:text-base flex items-center gap-2">
+                        <span>The 'Green Around Us' Tree Plantation</span>
+                        <span className="text-[10px] uppercase tracking-wider bg-[#71ea27] text-[#0a2312] font-black px-2.5 py-0.5 rounded-full shadow-sm">
+                          Explore Expansion
+                        </span>
+                      </h4>
+                      <p className="text-white/80 text-xs md:text-sm mt-0.5">
+                        Discover how sustainable tree plantations empower communities, restore soil, and fight drought.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[#71ea27] font-bold text-xs md:text-sm shrink-0 pt-2 sm:pt-0 sm:pl-3">
+                    <span>View Section</span>
+                    <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
+                  </div>
+                </a>
+
+              </div>
+
+            </div>
+
+          </div>
+        </motion.section>
+
+        {/* 'Green Around Us' Community Tree Plantation Expansion Section */}
+        <motion.section 
+          id="green-around-us"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="w-full max-w-6xl mx-auto rounded-3xl overflow-hidden relative scroll-mt-28"
+          style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
+          }}
+        >
+          <div className="p-8 md:p-12 lg:p-16">
+            
+            {/* Top Pill / Badge */}
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-white/20">
+              <div className="inline-flex items-center gap-2 bg-[#71ea27]/25 border border-[#71ea27]/60 px-4 py-1.5 rounded-full text-[#71ea27] font-bold text-sm tracking-wide shadow-sm drop-shadow">
+                <Sprout className="w-4 h-4 text-[#71ea27]" />
+                <span className="drop-shadow-sm">The 'Green Around Us' Initiative • Tree Plantation</span>
+              </div>
+              <div className="text-xs font-semibold tracking-widest uppercase text-white/80 drop-shadow-sm bg-black/30 px-3.5 py-1.5 rounded-full border border-white/10">
+                Community Agroforestry &amp; Soil Regeneration
+              </div>
+            </div>
+
+            {/* Section Header */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 items-start">
+              <div className="lg:col-span-7">
+                <span className="text-[#71ea27] font-bold tracking-widest uppercase text-xs md:text-sm block mb-2">
+                  Expanding the 'Green Around Us' Vision
+                </span>
+                <h2 className="text-3xl md:text-5xl font-black text-white leading-tight tracking-tight drop-shadow-md">
+                  Green Around Us: <br />
+                  <span className="text-[#71ea27] drop-shadow-[0_2px_12px_rgba(113,234,39,0.35)]">
+                    Community Tree Plantations
+                  </span>
+                </h2>
+              </div>
+              <div className="lg:col-span-5 bg-black/30 backdrop-blur-md p-6 rounded-2xl border border-white/15 shadow-lg">
+                <p className="text-white/95 text-base md:text-lg leading-relaxed font-medium drop-shadow-sm">
+                  "Establishing community tree plantations turns arid ground into lush shields of biodiversity, food security, and generational pride."
+                </p>
+                <div className="mt-4 flex items-center gap-3 text-xs font-semibold text-[#71ea27]">
+                  <Droplets className="w-4 h-4" />
+                  <span>Sustained by our rural borehole pipeline &amp; youth hands-on care</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Showcase Image & Quick Metrics */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12">
+              
+              {/* Photo Showcase */}
+              <div className="lg:col-span-7">
+                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden border border-white/20 shadow-2xl group">
+                  <img 
+                    id="children-tree-plantation-image"
+                    src={youthTreePlantation} 
+                    alt="Group of African teenagers and youth planting savannah tree seedlings and watering them with a garden hose pipe" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+                  
+                  {/* Floating Top Badge */}
+                  <div className="absolute top-4 left-4">
+                    <span className="inline-flex items-center gap-1.5 bg-black/60 backdrop-blur-md border border-white/25 text-[#71ea27] px-3 py-1 rounded-full text-xs font-bold shadow-md">
+                      <Sprout className="w-3.5 h-3.5 text-[#71ea27]" />
+                      Targeted Agroforestry Field Plan
+                    </span>
+                  </div>
+
+                  {/* Caption */}
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <p className="text-white/90 text-xs md:text-sm font-medium drop-shadow-md">
+                      SkyGold Animal Sanctuary and Permaculture Reserve
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Plantation Metrics & Overview */}
+              <div className="lg:col-span-5 space-y-4">
+                
+                <div className="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-5 shadow-lg space-y-3">
+                  <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                    <Trees className="w-5 h-5 text-[#71ea27]" />
+                    <span>The Living Classroom</span>
+                  </h3>
+                  <p className="text-white/85 text-sm leading-relaxed">
+                    By connecting our rural borehole directly to dedicated planting fields, schoolchildren actively learn the science of germination, soil conservation, and hose irrigation. They don't just study conservation—they physically build it.
+                  </p>
+                </div>
+
+                {/* 4 Quick Impact Metrics */}
+                <div className="grid grid-cols-2 gap-3.5">
+                  <div className="bg-black/35 backdrop-blur-md border border-white/15 rounded-xl p-4 text-center shadow-md">
+                    <span className="text-2xl md:text-3xl font-extrabold text-[#71ea27] block drop-shadow">10,000+</span>
+                    <span className="text-xs text-white/90 font-medium">Seedlings Target</span>
+                  </div>
+                  <div className="bg-black/35 backdrop-blur-md border border-white/15 rounded-xl p-4 text-center shadow-md">
+                    <span className="text-2xl md:text-3xl font-extrabold text-[#71ea27] block drop-shadow">-6°C</span>
+                    <span className="text-xs text-white/90 font-medium">Microclimate Cooling</span>
+                  </div>
+                  <div className="bg-black/35 backdrop-blur-md border border-white/15 rounded-xl p-4 text-center shadow-md">
+                    <span className="text-2xl md:text-3xl font-extrabold text-[#71ea27] block drop-shadow">100%</span>
+                    <span className="text-xs text-white/90 font-medium">Soil Erosion Defense</span>
+                  </div>
+                  <div className="bg-black/35 backdrop-blur-md border border-white/15 rounded-xl p-4 text-center shadow-md">
+                    <span className="text-2xl md:text-3xl font-extrabold text-[#71ea27] block drop-shadow">Zero</span>
+                    <span className="text-xs text-white/90 font-medium">Wild Forest Loss</span>
+                  </div>
                 </div>
 
               </div>
 
+            </div>
+
+            {/* Advantages and Uses of Community Tree Plantations Grid */}
+            <div className="space-y-6">
+              <div className="flex items-center gap-2.5 text-xs md:text-sm font-bold uppercase tracking-wider text-[#71ea27] pb-2 border-b border-white/15">
+                <ShieldCheck className="w-5 h-5 text-[#71ea27]" />
+                <span>6 Crucial Advantages &amp; Uses of a Community Tree Plantation</span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                {/* 1. Microclimate Cooling & Shade */}
+                <div className="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-5 hover:bg-black/45 hover:border-[#71ea27]/40 transition-all duration-300 space-y-3 shadow-lg">
+                  <div className="w-10 h-10 rounded-xl bg-[#71ea27]/20 border border-[#71ea27]/40 flex items-center justify-center text-[#71ea27]">
+                    <Sun className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-white font-extrabold text-base md:text-lg">
+                    1. Microclimate Regulation &amp; Shade
+                  </h4>
+                  <p className="text-white/80 text-xs md:text-sm leading-relaxed">
+                    Mature tree canopies lower ground surface heat by up to 8°C, providing natural thermal shields for rural homesteads, schools, and livestock during harsh dry seasons.
+                  </p>
+                </div>
+
+                {/* 2. Soil Conservation & Erosion Control */}
+                <div className="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-5 hover:bg-black/45 hover:border-[#71ea27]/40 transition-all duration-300 space-y-3 shadow-lg">
+                  <div className="w-10 h-10 rounded-xl bg-[#71ea27]/20 border border-[#71ea27]/40 flex items-center justify-center text-[#71ea27]">
+                    <Layers className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-white font-extrabold text-base md:text-lg">
+                    2. Soil Conservation &amp; Watersheds
+                  </h4>
+                  <p className="text-white/80 text-xs md:text-sm leading-relaxed">
+                    Deep indigenous root systems anchor topsoils against torrential rains, preventing destructive siltation, retaining soil moisture, and recharging underground water tables.
+                  </p>
+                </div>
+
+                {/* 3. Sustainable Community Woodlots */}
+                <div className="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-5 hover:bg-black/45 hover:border-[#71ea27]/40 transition-all duration-300 space-y-3 shadow-lg">
+                  <div className="w-10 h-10 rounded-xl bg-[#71ea27]/20 border border-[#71ea27]/40 flex items-center justify-center text-[#71ea27]">
+                    <Trees className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-white font-extrabold text-base md:text-lg">
+                    3. Sustainable Community Woodlots
+                  </h4>
+                  <p className="text-white/80 text-xs md:text-sm leading-relaxed">
+                    Designated planting zones supply renewable timber, fencing, and sustainable fuel, eliminating the need for villagers to cut down ancient virgin trees in wild conservation areas.
+                  </p>
+                </div>
+
+                {/* 4. Food Security & Agroforestry */}
+                <div className="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-5 hover:bg-black/45 hover:border-[#71ea27]/40 transition-all duration-300 space-y-3 shadow-lg">
+                  <div className="w-10 h-10 rounded-xl bg-[#71ea27]/20 border border-[#71ea27]/40 flex items-center justify-center text-[#71ea27]">
+                    <Leaf className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-white font-extrabold text-base md:text-lg">
+                    4. Food Security &amp; Agroforestry
+                  </h4>
+                  <p className="text-white/80 text-xs md:text-sm leading-relaxed">
+                    Intercropping native fruit trees, Baobabs, and Moringa provides families with nutrient-dense foods, drought-resistant fodder for animals, and natural remedies.
+                  </p>
+                </div>
+
+                {/* 5. Biodiversity & Pollinators */}
+                <div className="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-5 hover:bg-black/45 hover:border-[#71ea27]/40 transition-all duration-300 space-y-3 shadow-lg">
+                  <div className="w-10 h-10 rounded-xl bg-[#71ea27]/20 border border-[#71ea27]/40 flex items-center justify-center text-[#71ea27]">
+                    <Sprout className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-white font-extrabold text-base md:text-lg">
+                    5. Wildlife &amp; Pollinator Corridors
+                  </h4>
+                  <p className="text-white/80 text-xs md:text-sm leading-relaxed">
+                    Plantations create vital floral sanctuaries for honeybees, butterflies, and native bird species, stimulating community beekeeping (apiculture) and agricultural pollination.
+                  </p>
+                </div>
+
+                {/* 6. Youth Leadership & Education */}
+                <div className="bg-black/35 backdrop-blur-md border border-white/15 rounded-2xl p-5 hover:bg-black/45 hover:border-[#71ea27]/40 transition-all duration-300 space-y-3 shadow-lg">
+                  <div className="w-10 h-10 rounded-xl bg-[#71ea27]/20 border border-[#71ea27]/40 flex items-center justify-center text-[#71ea27]">
+                    <GraduationCap className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-white font-extrabold text-base md:text-lg">
+                    6. Youth Leadership &amp; Responsibility
+                  </h4>
+                  <p className="text-white/80 text-xs md:text-sm leading-relaxed">
+                    By nurturing seedlings with their own hands and watching them grow into full canopies, rural youth develop deep pride, self-confidence, and lifelong ecological responsibility.
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+            {/* Bottom Call to Action Banner */}
+            <div className="mt-12 bg-gradient-to-r from-black/60 via-black/45 to-black/60 border border-white/15 rounded-3xl p-8 text-center backdrop-blur-md shadow-2xl relative overflow-hidden">
+              <div className="max-w-3xl mx-auto space-y-4">
+                <div className="inline-flex items-center justify-center p-3 rounded-2xl bg-[#71ea27]/20 border border-[#71ea27]/40 text-[#71ea27] mb-1">
+                  <HeartHandshake className="w-6 h-6" />
+                </div>
+                <h3 className="text-2xl md:text-3xl font-black text-white">
+                  Join the 'Green Around Us' Movement
+                </h3>
+                <p className="text-white/90 text-sm md:text-base leading-relaxed">
+                  Support our borehole-powered tree nurseries and help us equip more rural school classes with seedlings, hose irrigation tools, and ecological field mentors.
+                </p>
+                <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+                  <a
+                    href="/contact"
+                    className="inline-flex items-center gap-2 bg-[#71ea27] hover:bg-[#5ec81e] text-[#111] font-bold py-3.5 px-7 rounded-xl transition-all hover:scale-105 shadow-[0_0_20px_rgba(113,234,39,0.3)] text-sm"
+                  >
+                    <Sprout className="w-4 h-4" />
+                    Adopt a Tree Seedling
+                  </a>
+                  <a
+                    href="https://wa.me/263772112011?text=Hello,%20I%20would%20like%20to%20learn%20more%20about%20the%20Green%20Around%20Us%20community%20tree%20plantation%20initiative."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-black/40 hover:bg-black/60 border border-white/25 text-white font-semibold py-3.5 px-6 rounded-xl transition-all text-sm backdrop-blur-sm"
+                  >
+                    <Users2 className="w-4 h-4 text-[#71ea27]" />
+                    Support Community Planting
+                  </a>
+                </div>
+              </div>
             </div>
 
           </div>
