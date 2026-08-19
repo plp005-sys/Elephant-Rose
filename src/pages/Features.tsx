@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -145,6 +146,7 @@ const documentaryVideo = {
   id: 'doc',
   title: 'Nature Documentary',
   subtitle: 'Wildlife & Ecosystem Feature',
+  badge: 'Documentaries',
   videoUrl: 'https://ik.imagekit.io/csia005/kling_20260703_VIDEO__4574_0.mp4?updatedAt=1783087085867',
   poster: rosiePoster,
   isYoutube: false
@@ -153,7 +155,7 @@ const documentaryVideo = {
 const dual2DCard = {
   id: '2d-cinema',
   title: '2D Cinema',
-  subtitle: 'Animated Wildlife & Sanctuary Stories',
+  subtitle: 'Rosie the African Elephant',
   badge: 'Animation',
   poster: 'https://img.youtube.com/vi/AbnEOFOdutw/hqdefault.jpg',
   episodes: [
@@ -180,16 +182,63 @@ const dual2DCard = {
   ]
 };
 
+const featureFilmVideo = {
+  id: 'feature-film',
+  title: 'Feature Film',
+  subtitle: 'Cinematic Story & Special Feature',
+  badge: 'Feature Films',
+  videoUrl: 'https://www.youtube.com/embed/WXhMy0AcLBs',
+  poster: 'https://img.youtube.com/vi/WXhMy0AcLBs/hqdefault.jpg',
+  isYoutube: true
+};
+
 export default function Features() {
+  const [searchParams] = useSearchParams();
+  const location = useLocation();
   const [templates, setTemplates] = useState<GalleryTemplate[]>(initialTemplates);
-  const [activeTemplateId, setActiveTemplateId] = useState<string>(initialTemplates[0].id);
+  const [activeTemplateId, setActiveTemplateId] = useState<string>(() => {
+    const templateParam = searchParams.get('template') || searchParams.get('category') || searchParams.get('tab');
+    if (templateParam === 'wedding' || templateParam === 'the-r-team' || templateParam === 'r-team') return 'wedding';
+    if (templateParam === 'outreach') return 'outreach';
+    if (templateParam === 'fundraisers') return 'fundraisers';
+    if (templateParam === 'filming' || templateParam === 'photo') return 'photo';
+    return initialTemplates[0].id;
+  });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isPlayingDoc, setIsPlayingDoc] = useState(false);
   const [is2DSeriesOpen, setIs2DSeriesOpen] = useState(false);
+  const [isPlayingFeatureFilm, setIsPlayingFeatureFilm] = useState(false);
   const [active2DEpisodeIndex, setActive2DEpisodeIndex] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [isSaved, setIsSaved] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Sync active template when searchParams or location hash changes
+  useEffect(() => {
+    const templateParam = searchParams.get('template') || searchParams.get('category') || searchParams.get('tab');
+    const hash = location.hash.replace('#', '').toLowerCase();
+
+    if (
+      templateParam === 'wedding' ||
+      templateParam === 'the-r-team' ||
+      templateParam === 'r-team' ||
+      hash === 'the-r-team' ||
+      hash === 'r-team' ||
+      hash === 'wedding'
+    ) {
+      setActiveTemplateId('wedding');
+      setCurrentImageIndex(0);
+    } else if (templateParam === 'outreach' || hash === 'outreach') {
+      setActiveTemplateId('outreach');
+      setCurrentImageIndex(0);
+    } else if (templateParam === 'fundraisers' || hash === 'fundraisers') {
+      setActiveTemplateId('fundraisers');
+      setCurrentImageIndex(0);
+    } else if (templateParam === 'filming' || templateParam === 'photo' || hash === 'filming' || hash === 'photo') {
+      setActiveTemplateId('photo');
+      setCurrentImageIndex(0);
+    }
+  }, [searchParams, location.hash]);
 
   // Load from IndexedDB on initial mount
   useEffect(() => {
@@ -533,7 +582,7 @@ export default function Features() {
               <p className="text-gray-300 text-lg">Watch our selected stories and features.</p>
             </div>
 
-            <div className="flex flex-col lg:flex-row justify-center items-center gap-8 relative min-h-[420px] max-w-6xl mx-auto">
+            <div className="flex flex-col lg:flex-row justify-center items-center gap-6 relative min-h-[420px] max-w-7xl mx-auto">
               
               {/* Card 1: Nature Documentary */}
               <motion.div
@@ -541,10 +590,10 @@ export default function Features() {
                 className={`relative rounded-3xl overflow-hidden border border-white/15 bg-[#141414] shadow-2xl transition-all duration-300 ${
                   isPlayingDoc 
                     ? 'z-50 w-full lg:w-[960px] aspect-video' 
-                    : 'z-10 w-full lg:w-1/2 aspect-[16/10] cursor-pointer group hover:border-[#71ea27]/50 hover:shadow-[0_0_30px_rgba(113,234,39,0.2)]'
+                    : 'z-10 w-full lg:w-1/3 aspect-[16/10] cursor-pointer group hover:border-[#71ea27]/50 hover:shadow-[0_0_30px_rgba(113,234,39,0.2)]'
                 }`}
                 onClick={() => {
-                  if (!isPlayingDoc && !is2DSeriesOpen) {
+                  if (!isPlayingDoc && !is2DSeriesOpen && !isPlayingFeatureFilm) {
                     setIsPlayingDoc(true);
                   }
                 }}
@@ -570,7 +619,7 @@ export default function Features() {
                     </button>
                     <div className="absolute top-5 left-5 pointer-events-none">
                       <span className="bg-black/70 backdrop-blur-md border border-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">
-                        Nature Documentary
+                        {documentaryVideo.badge}
                       </span>
                     </div>
                   </div>
@@ -584,7 +633,7 @@ export default function Features() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-between p-6">
                       <div className="flex justify-between items-start">
                         <span className="bg-black/60 backdrop-blur-md border border-white/20 text-[#71ea27] text-xs font-bold px-3 py-1 rounded-full">
-                          Feature Film
+                          {documentaryVideo.badge}
                         </span>
                       </div>
 
@@ -602,9 +651,7 @@ export default function Features() {
                         </div>
                       </div>
 
-                      <div className="text-center">
-                        <span className="text-[11px] uppercase tracking-wider text-white/70 font-semibold">Click to Play Documentary</span>
-                      </div>
+                      <div className="h-4" />
                     </div>
                   </>
                 )}
@@ -616,10 +663,10 @@ export default function Features() {
                 className={`relative rounded-3xl overflow-hidden border border-white/15 bg-[#141414] shadow-2xl transition-all duration-300 ${
                   is2DSeriesOpen 
                     ? 'z-50 w-full lg:w-[1000px] min-h-[500px]' 
-                    : 'z-10 w-full lg:w-1/2 aspect-[16/10] cursor-pointer group hover:border-[#71ea27]/50 hover:shadow-[0_0_30px_rgba(113,234,39,0.2)]'
+                    : 'z-10 w-full lg:w-1/3 aspect-[16/10] cursor-pointer group hover:border-[#71ea27]/50 hover:shadow-[0_0_30px_rgba(113,234,39,0.2)]'
                 }`}
                 onClick={() => {
-                  if (!is2DSeriesOpen && !isPlayingDoc) {
+                  if (!is2DSeriesOpen && !isPlayingDoc && !isPlayingFeatureFilm) {
                     setIs2DSeriesOpen(true);
                     setActive2DEpisodeIndex(null); // opens side-by-side selection panels by default
                   }
@@ -796,9 +843,83 @@ export default function Features() {
                 )}
               </motion.div>
 
+              {/* Card 3: Feature Films */}
+              <motion.div
+                layout
+                className={`relative rounded-3xl overflow-hidden border border-white/15 bg-[#141414] shadow-2xl transition-all duration-300 ${
+                  isPlayingFeatureFilm 
+                    ? 'z-50 w-full lg:w-[960px] aspect-video' 
+                    : 'z-10 w-full lg:w-1/3 aspect-[16/10] cursor-pointer group hover:border-[#71ea27]/50 hover:shadow-[0_0_30px_rgba(113,234,39,0.2)]'
+                }`}
+                onClick={() => {
+                  if (!isPlayingFeatureFilm && !isPlayingDoc && !is2DSeriesOpen) {
+                    setIsPlayingFeatureFilm(true);
+                  }
+                }}
+                transition={{ type: 'spring', stiffness: 220, damping: 25 }}
+              >
+                {isPlayingFeatureFilm ? (
+                  <div className="w-full h-full relative bg-black">
+                    <iframe
+                      src={`${featureFilmVideo.videoUrl}?autoplay=1`}
+                      title={featureFilmVideo.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full border-0"
+                    />
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsPlayingFeatureFilm(false);
+                      }}
+                      aria-label="Close feature film player"
+                      className="absolute top-5 right-5 w-11 h-11 rounded-full bg-black/70 hover:bg-red-600 flex items-center justify-center text-white backdrop-blur-md z-50 transition-colors border border-white/20 shadow-lg"
+                    >
+                      <X size={22} />
+                    </button>
+                    <div className="absolute top-5 left-5 pointer-events-none">
+                      <span className="bg-black/70 backdrop-blur-md border border-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">
+                        {featureFilmVideo.badge}
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <img 
+                      src={featureFilmVideo.poster} 
+                      alt={featureFilmVideo.title} 
+                      className="w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-between p-6">
+                      <div className="flex justify-between items-start">
+                        <span className="bg-black/60 backdrop-blur-md border border-white/20 text-[#71ea27] text-xs font-bold px-3 py-1 rounded-full">
+                          {featureFilmVideo.badge}
+                        </span>
+                      </div>
+
+                      <div className="text-center space-y-3">
+                        <motion.div 
+                          whileHover={{ scale: 1.12 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="w-16 h-16 rounded-full bg-black/60 backdrop-blur-md border border-white/25 flex items-center justify-center text-white mx-auto group-hover:border-[#71ea27] group-hover:text-[#71ea27] group-hover:shadow-[0_0_20px_rgba(113,234,39,0.4)] transition-all"
+                        >
+                          <Play size={28} className="ml-1" />
+                        </motion.div>
+                        <div>
+                          <h3 className="text-2xl font-bold text-white drop-shadow-md">{featureFilmVideo.title}</h3>
+                          <p className="text-gray-300 text-xs sm:text-sm mt-1">{featureFilmVideo.subtitle}</p>
+                        </div>
+                      </div>
+
+                      <div className="h-4" />
+                    </div>
+                  </>
+                )}
+              </motion.div>
+
               {/* Background Backdrop Overlay when any video is playing or modal is open */}
               <AnimatePresence>
-                {(isPlayingDoc || is2DSeriesOpen) && (
+                {(isPlayingDoc || is2DSeriesOpen || isPlayingFeatureFilm) && (
                   <motion.div 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -807,6 +928,7 @@ export default function Features() {
                     onClick={() => {
                       setIsPlayingDoc(false);
                       setIs2DSeriesOpen(false);
+                      setIsPlayingFeatureFilm(false);
                       setActive2DEpisodeIndex(null);
                     }}
                   />

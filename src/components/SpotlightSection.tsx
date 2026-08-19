@@ -32,7 +32,7 @@ const stories = [
     title: 'From hearts to hearts - The R-Team.',
     date: 'July 22, 2024',
     image: story4,
-    link: '/about',
+    link: '/gallery?template=wedding',
   },
 ];
 
