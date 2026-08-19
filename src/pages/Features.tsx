@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { ChevronLeft, ChevronRight, Play, X, Image as ImageIcon, CheckCircle2, Upload, Trash2, Plus } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Play, X, Image as ImageIcon, CheckCircle2, Upload, Trash2, Plus, Film, Tv, Layers, ArrowLeft, Video } from 'lucide-react';
 import { loadGalleryTemplatesFromDB, saveGalleryTemplatesToDB } from '../utils/galleryStorage';
 import galleryBgImage from '../assets/images/ChatGPT Image Jul 22, 2026, 05_30_15 PM.jpg';
 import cinemaBgImage from '../assets/images/ChatGPT Image Jul 29, 2026, 12_28_28 PM.jpg';
@@ -141,35 +141,52 @@ const initialTemplates: GalleryTemplate[] = [
   }
 ];
 
-const cinemaVideos = [
-  {
-    id: 1,
-    title: 'Nature Documentary',
-    videoUrl: 'https://ik.imagekit.io/csia005/kling_20260703_VIDEO__4574_0.mp4?updatedAt=1783087085867',
-    poster: rosiePoster,
-    isYoutube: false
-  },
-  {
-    id: 2,
-    title: '2D Cinema',
-    videoUrl: 'https://www.youtube.com/embed/AbnEOFOdutw?si=Gaj53Ee5ZnyKHdo1',
-    poster: 'https://img.youtube.com/vi/AbnEOFOdutw/hqdefault.jpg',
-    isYoutube: true
-  },
-  {
-    id: 3,
-    title: 'Rosie 2D',
-    videoUrl: 'https://www.youtube.com/embed/KSHei1YaxCY',
-    poster: 'https://img.youtube.com/vi/KSHei1YaxCY/hqdefault.jpg',
-    isYoutube: true
-  }
-];
+const documentaryVideo = {
+  id: 'doc',
+  title: 'Nature Documentary',
+  subtitle: 'Wildlife & Ecosystem Feature',
+  videoUrl: 'https://ik.imagekit.io/csia005/kling_20260703_VIDEO__4574_0.mp4?updatedAt=1783087085867',
+  poster: rosiePoster,
+  isYoutube: false
+};
+
+const dual2DCard = {
+  id: '2d-cinema',
+  title: '2D Cinema',
+  subtitle: 'Animated Wildlife & Sanctuary Stories',
+  badge: 'Animation',
+  poster: 'https://img.youtube.com/vi/AbnEOFOdutw/hqdefault.jpg',
+  episodes: [
+    {
+      id: 'ep1',
+      title: 'Rosie 2D Trailer',
+      episodeLabel: 'Episode 1',
+      subtitle: 'by VMP (Australia)',
+      buttonText: 'Rosie 2D trailer by VMP (Australia)',
+      videoUrl: 'https://www.youtube.com/embed/AbnEOFOdutw?si=Gaj53Ee5ZnyKHdo1',
+      poster: 'https://img.youtube.com/vi/AbnEOFOdutw/hqdefault.jpg',
+      badge: 'Trailer'
+    },
+    {
+      id: 'ep2',
+      title: 'Rosie 2D Intro',
+      episodeLabel: 'Episode 2',
+      subtitle: 'by Azure Prince Animation',
+      buttonText: 'Rosie 2D Intro by Azure Prince Animation',
+      videoUrl: 'https://www.youtube.com/embed/KSHei1YaxCY',
+      poster: 'https://img.youtube.com/vi/KSHei1YaxCY/hqdefault.jpg',
+      badge: 'Intro'
+    }
+  ]
+};
 
 export default function Features() {
   const [templates, setTemplates] = useState<GalleryTemplate[]>(initialTemplates);
   const [activeTemplateId, setActiveTemplateId] = useState<string>(initialTemplates[0].id);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [playingVideoId, setPlayingVideoId] = useState<number | null>(null);
+  const [isPlayingDoc, setIsPlayingDoc] = useState(false);
+  const [is2DSeriesOpen, setIs2DSeriesOpen] = useState(false);
+  const [active2DEpisodeIndex, setActive2DEpisodeIndex] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [isSaved, setIsSaved] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -516,83 +533,286 @@ export default function Features() {
               <p className="text-gray-300 text-lg">Watch our selected stories and features.</p>
             </div>
 
-            <div className="flex flex-col lg:flex-row justify-center items-center gap-6 relative min-h-[400px]">
-              {cinemaVideos.map((video) => {
-                const isPlaying = playingVideoId === video.id;
-                
-                return (
-                  <motion.div
-                    key={video.id}
-                    layout
-                    className={`relative rounded-3xl overflow-hidden border border-gray-800 bg-[#1a1a1a] shadow-xl ${
-                      isPlaying ? 'z-50 w-full lg:w-[1000px] aspect-video' : 'z-10 w-full lg:w-1/3 aspect-[4/3] cursor-pointer group hover:border-gray-600 transition-colors'
-                    }`}
-                    onClick={() => {
-                      if (!isPlaying) {
-                        setPlayingVideoId(video.id);
-                      }
-                    }}
-                    transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-                  >
-                    {isPlaying ? (
-                      <div className="w-full h-full relative">
-                        {video.isYoutube ? (
+            <div className="flex flex-col lg:flex-row justify-center items-center gap-8 relative min-h-[420px] max-w-6xl mx-auto">
+              
+              {/* Card 1: Nature Documentary */}
+              <motion.div
+                layout
+                className={`relative rounded-3xl overflow-hidden border border-white/15 bg-[#141414] shadow-2xl transition-all duration-300 ${
+                  isPlayingDoc 
+                    ? 'z-50 w-full lg:w-[960px] aspect-video' 
+                    : 'z-10 w-full lg:w-1/2 aspect-[16/10] cursor-pointer group hover:border-[#71ea27]/50 hover:shadow-[0_0_30px_rgba(113,234,39,0.2)]'
+                }`}
+                onClick={() => {
+                  if (!isPlayingDoc && !is2DSeriesOpen) {
+                    setIsPlayingDoc(true);
+                  }
+                }}
+                transition={{ type: 'spring', stiffness: 220, damping: 25 }}
+              >
+                {isPlayingDoc ? (
+                  <div className="w-full h-full relative bg-black">
+                    <video
+                      src={documentaryVideo.videoUrl}
+                      controls
+                      autoPlay
+                      className="w-full h-full object-cover"
+                    />
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsPlayingDoc(false);
+                      }}
+                      aria-label="Close documentary player"
+                      className="absolute top-5 right-5 w-11 h-11 rounded-full bg-black/70 hover:bg-red-600 flex items-center justify-center text-white backdrop-blur-md z-50 transition-colors border border-white/20 shadow-lg"
+                    >
+                      <X size={22} />
+                    </button>
+                    <div className="absolute top-5 left-5 pointer-events-none">
+                      <span className="bg-black/70 backdrop-blur-md border border-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">
+                        Nature Documentary
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <img 
+                      src={documentaryVideo.poster} 
+                      alt={documentaryVideo.title} 
+                      className="w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-between p-6">
+                      <div className="flex justify-between items-start">
+                        <span className="bg-black/60 backdrop-blur-md border border-white/20 text-[#71ea27] text-xs font-bold px-3 py-1 rounded-full">
+                          Feature Film
+                        </span>
+                      </div>
+
+                      <div className="text-center space-y-3">
+                        <motion.div 
+                          whileHover={{ scale: 1.12 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="w-16 h-16 rounded-full bg-black/60 backdrop-blur-md border border-white/25 flex items-center justify-center text-white mx-auto group-hover:border-[#71ea27] group-hover:text-[#71ea27] group-hover:shadow-[0_0_20px_rgba(113,234,39,0.4)] transition-all"
+                        >
+                          <Play size={28} className="ml-1" />
+                        </motion.div>
+                        <div>
+                          <h3 className="text-2xl font-bold text-white drop-shadow-md">{documentaryVideo.title}</h3>
+                          <p className="text-gray-300 text-xs sm:text-sm mt-1">{documentaryVideo.subtitle}</p>
+                        </div>
+                      </div>
+
+                      <div className="text-center">
+                        <span className="text-[11px] uppercase tracking-wider text-white/70 font-semibold">Click to Play Documentary</span>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </motion.div>
+
+              {/* Card 2: 2D Cinema Series (Hosts 2 YouTube links) */}
+              <motion.div
+                layout
+                className={`relative rounded-3xl overflow-hidden border border-white/15 bg-[#141414] shadow-2xl transition-all duration-300 ${
+                  is2DSeriesOpen 
+                    ? 'z-50 w-full lg:w-[1000px] min-h-[500px]' 
+                    : 'z-10 w-full lg:w-1/2 aspect-[16/10] cursor-pointer group hover:border-[#71ea27]/50 hover:shadow-[0_0_30px_rgba(113,234,39,0.2)]'
+                }`}
+                onClick={() => {
+                  if (!is2DSeriesOpen && !isPlayingDoc) {
+                    setIs2DSeriesOpen(true);
+                    setActive2DEpisodeIndex(null); // opens side-by-side selection panels by default
+                  }
+                }}
+                transition={{ type: 'spring', stiffness: 220, damping: 25 }}
+              >
+                {is2DSeriesOpen ? (
+                  <div className="w-full h-full p-5 sm:p-7 flex flex-col bg-gradient-to-b from-[#1b1b1b] to-[#111111] text-white">
+                    
+                    {/* Header bar inside expanded card */}
+                    <div className="flex items-center justify-between border-b border-white/15 pb-4 mb-6">
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-xl bg-[#71ea27]/20 border border-[#71ea27]/40 flex items-center justify-center text-[#71ea27]">
+                          <Tv className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <h3 className="text-lg sm:text-xl font-bold text-white">2D Cinema</h3>
+                          </div>
+                          <p className="text-xs text-gray-300">
+                            {active2DEpisodeIndex === null 
+                              ? 'Select an episode below to watch in-line in the cinema player' 
+                              : `Currently playing: ${dual2DCard.episodes[active2DEpisodeIndex].title}`}
+                          </p>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setIs2DSeriesOpen(false);
+                          setActive2DEpisodeIndex(null);
+                        }}
+                        aria-label="Close 2D Cinema"
+                        className="w-10 h-10 rounded-full bg-black/60 hover:bg-red-600 flex items-center justify-center text-white backdrop-blur-md transition-colors border border-white/20"
+                      >
+                        <X size={20} />
+                      </button>
+                    </div>
+
+                    {/* Content View: EITHER 2 Panels Side-by-Side OR In-line Player */}
+                    {active2DEpisodeIndex === null ? (
+                      /* 2 Panels Side-by-Side */
+                      <div className="space-y-4 my-auto py-2">
+                        <div className="text-center mb-2">
+                          <p className="text-sm font-semibold text-gray-200">
+                            Choose an episode to play in the main player:
+                          </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          {dual2DCard.episodes.map((ep, idx) => (
+                            <motion.div
+                              key={ep.id}
+                              whileHover={{ scale: 1.02 }}
+                              whileTap={{ scale: 0.98 }}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setActive2DEpisodeIndex(idx);
+                              }}
+                              className="group/panel bg-black/60 hover:bg-black/80 border border-white/15 hover:border-[#71ea27] rounded-2xl p-4 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(113,234,39,0.25)] flex flex-col justify-between"
+                            >
+                              <div className="relative aspect-video rounded-xl overflow-hidden mb-4 border border-white/10">
+                                <img 
+                                  src={ep.poster} 
+                                  alt={ep.title}
+                                  className="w-full h-full object-cover group-hover/panel:scale-105 transition-transform duration-500" 
+                                />
+                                <div className="absolute inset-0 bg-black/40 group-hover/panel:bg-black/20 transition-colors flex items-center justify-center">
+                                  <div className="w-14 h-14 rounded-full bg-black/60 border border-white/30 group-hover/panel:border-[#71ea27] group-hover/panel:text-[#71ea27] text-white flex items-center justify-center transition-all shadow-md group-hover/panel:scale-110">
+                                    <Play size={24} className="ml-1" />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <button 
+                                className="w-full py-2.5 px-4 rounded-xl bg-[#71ea27] hover:bg-[#5ec81e] text-[#111] font-bold text-xs flex items-center justify-center gap-2 transition-colors mt-auto shadow-md"
+                              >
+                                <Play size={14} className="fill-current" />
+                                <span>{ep.buttonText || `Play ${ep.episodeLabel} in Main Card`}</span>
+                              </button>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      /* In-line Player in Main Card */
+                      <div className="flex-grow flex flex-col justify-between space-y-4">
+                        <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-black">
                           <iframe
-                            src={`${video.videoUrl}&autoplay=1`}
-                            title={video.title}
+                            src={`${dual2DCard.episodes[active2DEpisodeIndex].videoUrl}${
+                              dual2DCard.episodes[active2DEpisodeIndex].videoUrl.includes('?') ? '&' : '?'
+                            }autoplay=1`}
+                            title={dual2DCard.episodes[active2DEpisodeIndex].title}
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen
                             className="w-full h-full border-0"
-                          ></iframe>
-                        ) : (
-                          <video
-                            src={video.videoUrl}
-                            controls
-                            autoPlay
-                            className="w-full h-full object-cover"
                           />
-                        )}
-                        <button 
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setPlayingVideoId(null);
-                          }}
-                          className="absolute top-6 right-6 w-12 h-12 rounded-full bg-black/60 hover:bg-red-500 flex items-center justify-center text-white backdrop-blur-sm z-50 transition-colors border border-white/10"
-                        >
-                          <X size={24} />
-                        </button>
-                      </div>
-                    ) : (
-                      <>
-                        <img src={video.poster} alt={video.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700" />
-                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 hover:bg-black/20 transition-colors">
-                          <motion.div 
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="w-20 h-20 rounded-full bg-black/50 backdrop-blur-md border border-white/20 flex items-center justify-center text-white mb-6 group-hover:border-[#71ea27] group-hover:text-[#71ea27] transition-colors"
-                          >
-                            <Play size={32} className="ml-2" />
-                          </motion.div>
-                          <h3 className="text-2xl font-bold text-white drop-shadow-md px-6 text-center">{video.title}</h3>
                         </div>
-                      </>
+
+                        {/* Switcher Controls: Switch episodes or return to side-by-side panels */}
+                        <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-bold uppercase tracking-wider text-gray-400 mr-1">Switch Episode:</span>
+                            {dual2DCard.episodes.map((ep, idx) => (
+                              <button
+                                key={ep.id}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setActive2DEpisodeIndex(idx);
+                                }}
+                                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                                  active2DEpisodeIndex === idx
+                                    ? 'bg-[#71ea27] text-black shadow-[0_0_15px_rgba(113,234,39,0.4)] scale-105'
+                                    : 'bg-black/60 hover:bg-black/90 text-gray-200 border border-white/15 hover:border-[#71ea27]/50'
+                                }`}
+                              >
+                                <Play size={12} className={active2DEpisodeIndex === idx ? 'fill-current' : ''} />
+                                {ep.episodeLabel}: {ep.title}
+                              </button>
+                            ))}
+                          </div>
+
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setActive2DEpisodeIndex(null); // Back to side-by-side selection panels
+                              }}
+                              className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all flex items-center gap-1.5"
+                            >
+                              <Layers size={14} className="text-[#71ea27]" />
+                              <span>View Both Panels</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     )}
-                  </motion.div>
-                );
-              })}
-              
-              {/* Overlay when a video is playing */}
+
+                  </div>
+                ) : (
+                  /* Idle State for 2D Cinema Card */
+                  <>
+                    <img 
+                      src={dual2DCard.poster} 
+                      alt={dual2DCard.title} 
+                      className="w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-between p-6">
+                      <div className="flex justify-between items-start">
+                        <span className="bg-black/60 backdrop-blur-md border border-white/20 text-[#71ea27] text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5">
+                          <Layers size={13} className="text-[#71ea27]" />
+                          {dual2DCard.badge}
+                        </span>
+                      </div>
+
+                      <div className="text-center space-y-3">
+                        <motion.div 
+                          whileHover={{ scale: 1.12 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="w-16 h-16 rounded-full bg-black/60 backdrop-blur-md border border-white/25 flex items-center justify-center text-white mx-auto group-hover:border-[#71ea27] group-hover:text-[#71ea27] group-hover:shadow-[0_0_20px_rgba(113,234,39,0.4)] transition-all"
+                        >
+                          <Play size={28} className="ml-1" />
+                        </motion.div>
+                        <div>
+                          <h3 className="text-2xl font-bold text-white drop-shadow-md">{dual2DCard.title}</h3>
+                          <p className="text-gray-300 text-xs sm:text-sm mt-1">{dual2DCard.subtitle}</p>
+                        </div>
+                      </div>
+
+                      <div className="h-4" />
+                    </div>
+                  </>
+                )}
+              </motion.div>
+
+              {/* Background Backdrop Overlay when any video is playing or modal is open */}
               <AnimatePresence>
-                {playingVideoId && (
+                {(isPlayingDoc || is2DSeriesOpen) && (
                   <motion.div 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="fixed inset-0 bg-black/90 z-40 backdrop-blur-sm"
-                    onClick={() => setPlayingVideoId(null)}
+                    className="fixed inset-0 bg-black/85 z-40 backdrop-blur-sm"
+                    onClick={() => {
+                      setIsPlayingDoc(false);
+                      setIs2DSeriesOpen(false);
+                      setActive2DEpisodeIndex(null);
+                    }}
                   />
                 )}
               </AnimatePresence>
+
             </div>
           </div>
         </section>
