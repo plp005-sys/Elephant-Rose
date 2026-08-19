@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import plantImage from '../assets/images/african_hands_baobab_seedling_1784842129198.jpg';
 import turtleImage from '../assets/images/turtle_underwater_1784825424782.jpg';
 
@@ -59,12 +60,12 @@ export default function RebuildingSection() {
                     Explore our projects that drive meaningful<br/>change and help protect the forests for<br/>future generation.
                   </p>
                   <div className="flex justify-center">
-                    <a 
-                      href="/our-work#borehole-project"
+                    <Link 
+                      to="/our-work#borehole-project"
                       className="inline-block bg-[#c60c91] hover:bg-[#a10a76] text-white font-bold py-2.5 px-8 rounded-full transition-colors duration-300 shadow-md hover:shadow-lg"
                     >
                       View More
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -114,12 +115,12 @@ export default function RebuildingSection() {
                     Our work is dedicated to imparting<br/>knowledge of wildlife stewardship and<br/>children's environmental education, mostly in remote areas.
                   </p>
                   <div className="flex justify-center">
-                    <a 
-                      href="/our-work#environmental-education"
+                    <Link 
+                      to="/our-work#environmental-education"
                       className="inline-block bg-[#c60c91] hover:bg-[#a10a76] text-white font-bold py-2.5 px-8 rounded-full transition-colors duration-300 shadow-md hover:shadow-lg"
                     >
                       View More
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

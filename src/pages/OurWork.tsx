@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -261,18 +261,23 @@ export default function OurWork() {
 
                 {/* Action Links */}
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                  <a
-                    href="/contact#donate"
+                  <Link
+                    to="/contact#donate"
                     className="inline-flex items-center justify-center gap-2 bg-[#71ea27] hover:bg-[#5ec81e] text-[#111] font-bold py-3.5 px-6 rounded-xl transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(113,234,39,0.3)] text-sm"
                   >
                     <HeartHandshake className="w-4 h-4 text-[#0a2312]" />
                     Support This Project
-                  </a>
+                  </Link>
                 </div>
 
                 {/* Interactive Expansion Link Banner to Tree Plantation */}
                 <a
                   href="#green-around-us"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const el = document.getElementById('green-around-us');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }}
                   className="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-2xl bg-[#71ea27]/15 hover:bg-[#71ea27]/25 border border-[#71ea27]/40 text-white transition-all duration-300 group cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(113,234,39,0.25)] block"
                 >
                   <div className="flex items-center gap-3.5">
@@ -525,13 +530,13 @@ export default function OurWork() {
                   Support our borehole-powered tree nurseries and help us equip more rural school classes with seedlings, hose irrigation tools, and ecological field mentors.
                 </p>
                 <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-                  <a
-                    href="/contact#donate"
+                  <Link
+                    to="/contact#donate"
                     className="inline-flex items-center gap-2 bg-[#71ea27] hover:bg-[#5ec81e] text-[#111] font-bold py-3.5 px-7 rounded-xl transition-all hover:scale-105 shadow-[0_0_20px_rgba(113,234,39,0.3)] text-sm"
                   >
                     <Sprout className="w-4 h-4" />
                     Adopt a Tree Seedling
-                  </a>
+                  </Link>
                   <a
                     href="https://wa.me/263772112011?text=Hello,%20I%20would%20like%20to%20learn%20more%20about%20the%20Green%20Around%20Us%20community%20tree%20plantation%20initiative."
                     target="_blank"
@@ -692,13 +697,13 @@ export default function OurWork() {
                   When children in remote areas understand ecology, wildlife behavior, and fire prevention, they become the first line of defense for Africa's most cherished ecosystems.
                 </p>
                 <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-                  <a
-                    href="/contact#donate"
+                  <Link
+                    to="/contact#donate"
                     className="inline-flex items-center gap-2 bg-[#71ea27] hover:bg-[#5ec81e] text-[#111] font-bold py-3 px-6 rounded-xl transition-all hover:scale-105 shadow-[0_0_20px_rgba(113,234,39,0.3)] text-sm"
                   >
                     <BookOpen className="w-4 h-4" />
                     Partner in Education
-                  </a>
+                  </Link>
                   <a
                     href="https://wa.me/263772112011?text=Hello,%20I%20would%20like%20to%20learn%20more%20about%20your%20environmental%20education%20programs%20for%20remote%20schools."
                     target="_blank"
