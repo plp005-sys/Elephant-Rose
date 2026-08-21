@@ -34,7 +34,7 @@ import fundraiserImg11 from '../assets/images/IMG_1852.jpg';
 import fundraiserImg12 from '../assets/images/_MG_3559.jpg';
 
 import filmingImg1 from '../assets/images/IMG_4640.jpg';
-import filmingImg2 from '../assets/images/IMG_5967-1.jpg';
+import filmingImg2 from '../assets/images/IMG_5967.jpg';
 import filmingImg3 from '../assets/images/IMG_7617.jpg';
 import filmingImg4 from '../assets/images/IMG_7691.jpg';
 import filmingImg5 from '../assets/images/IMG_7760.jpg';

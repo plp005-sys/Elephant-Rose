@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import story1 from '../assets/images/boy_holding_seedling_1786047643938.jpg';
-import story2 from '../assets/images/IMG_8157.jpg';
+import story2 from '../assets/images/IMG_8157.jpg?update=1';
 import story3 from '../assets/images/IMG_7945.jpg';
 import story4 from '../assets/images/IMG_7621.jpg';
 
