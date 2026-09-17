@@ -631,8 +631,14 @@ export default function OurWork() {
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                          <div className="absolute top-4 left-4">
-                            <span className="inline-flex items-center gap-1.5 bg-black/60 backdrop-blur-md border border-white/25 text-[#71ea27] px-3 py-1 rounded-full text-xs font-bold shadow-md">
+                          <div className={`absolute ${
+                            scenario.id === 'bushfire-management' 
+                              ? 'bottom-4 left-4' 
+                              : scenario.id === 'classroom-documentaries'
+                              ? 'top-4 left-4 md:top-auto md:bottom-4 md:left-auto md:right-4'
+                              : 'top-4 left-4'
+                          }`}>
+                            <span className={`${scenario.id === 'classroom-documentaries' || scenario.id === 'wildlife-immersion' ? 'hidden md:inline-flex' : 'inline-flex'} items-center gap-1.5 bg-black/60 backdrop-blur-md border border-white/25 text-[#71ea27] px-3 py-1 rounded-full text-xs font-bold shadow-md`}>
                               <BadgeIcon className="w-3.5 h-3.5 text-[#71ea27]" />
                               {scenario.badge}
                             </span>
