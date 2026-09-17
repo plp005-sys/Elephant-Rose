@@ -26,7 +26,7 @@ export default function Hero() {
             <span className="text-[#71ea27]">Big Impact</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-md italic font-serif leading-relaxed" style={{ fontStyle: 'italic' }}>
-            "A noble plan once recorded will never die but will live on long after we are gone"
+            "A noble plan once recorded will never die but long after we are gone will be a living thing"
           </p>
           <Link to="/about" className="inline-block bg-[#bce3a5] text-green-900 font-bold px-8 py-3 rounded-full text-sm hover:bg-[#a6d18f] transition-all duration-300">
             Our Approach
