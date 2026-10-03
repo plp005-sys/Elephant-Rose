@@ -166,7 +166,7 @@ export default function OurWork() {
                 <span className="drop-shadow-sm">Featured Project • In Progress</span>
               </div>
               <div className="text-xs font-semibold tracking-widest uppercase text-white/80 drop-shadow-sm bg-black/30 px-3.5 py-1.5 rounded-full border border-white/10">
-                SkyGold Estate • Domboshava
+                Living Water Estate, Domboshava
               </div>
             </div>
 
@@ -202,7 +202,7 @@ export default function OurWork() {
                   <img 
                     id="garden-peace-image"
                     src={gardenPeaceSanctuary} 
-                    alt="The Garden of Peace sanctuary and reflection pool at SkyGold Estate" 
+                    alt="The Garden of Peace sanctuary and reflection pool at Living Water Estate" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
@@ -232,7 +232,7 @@ export default function OurWork() {
                     We are currently advancing a crucial <strong className="text-white font-bold underline decoration-[#71ea27]/50 underline-offset-4">rural borehole sinking project</strong> at the heart of our community site. Water is the lifeblood of our conservation mission, unlocking sustainable irrigation and resilient greening.
                   </p>
                   <p>
-                    Once complete, the borehole will directly water the <strong className="text-[#71ea27] font-bold">'Garden of Peace'</strong> — a quiet plantation bush nestled within the SkyGold Estate.
+                    Once complete, the borehole will directly water the <strong className="text-[#71ea27] font-bold">'Garden of Peace'</strong> — a quiet plantation bush nestled within the Living Water Estate.
                   </p>
                 </div>
 
@@ -240,7 +240,7 @@ export default function OurWork() {
                 <div className="bg-black/45 backdrop-blur-md border border-white/15 rounded-2xl p-6 space-y-4 shadow-xl">
                   <div className="flex items-center gap-2.5 text-white font-bold text-base md:text-lg">
                     <Trees className="w-5 h-5 text-[#71ea27] drop-shadow" />
-                    <span className="drop-shadow-sm">A Haven in Nature at SkyGold Estate</span>
+                    <span className="drop-shadow-sm">A Haven in Nature at Living Water Estate</span>
                   </div>
 
                   <ul className="space-y-3 text-sm text-white/95 leading-snug">
@@ -384,7 +384,7 @@ export default function OurWork() {
                   {/* Caption */}
                   <div className="absolute bottom-4 left-4 right-4">
                     <p className="text-white/90 text-xs md:text-sm font-medium drop-shadow-md">
-                      SkyGold Animal Sanctuary and Permaculture Reserve
+                      Living Water Animal Sanctuary and Permaculture Reserve
                     </p>
                   </div>
                 </div>

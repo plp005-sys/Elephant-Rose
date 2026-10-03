@@ -109,7 +109,7 @@ export default function Contact() {
                     </div>
                     <div className="text-gray-300">
                       <p className="font-medium text-white/90 text-sm">Operations & Estate</p>
-                      <p>SkyGold Estate, 01 DRC Govera Village Domboshava, Goromonzi Rural District.</p>
+                      <p>Living Water Estate, 01 DRC Govera Village Domboshava, Goromonzi Rural District.</p>
                     </div>
                   </div>
                 </div>
@@ -305,7 +305,7 @@ export default function Contact() {
                     <h4>Field Volunteering</h4>
                   </div>
                   <p className="text-sm text-gray-300">
-                    Participate in tree-planting days, nursery development, and agroecology workshops at SkyGold Estate and local communities.
+                    Participate in tree-planting days, nursery development, and agroecology workshops at Living Water Estate and local communities.
                   </p>
                 </div>
 

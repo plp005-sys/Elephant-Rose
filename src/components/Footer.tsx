@@ -20,7 +20,7 @@ export default function Footer({ textWhiteBold = false }: FooterProps) {
               </div>
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#71ea27] shrink-0 mt-0.5" />
-                <p className={textWhiteBold ? 'text-white font-bold' : ''}>SkyGold Estate, 01 DRC Govera Village Domboshava, Goromonzi Rural District.</p>
+                <p className={textWhiteBold ? 'text-white font-bold' : ''}>Living Water Estate, 01 DRC Govera Village Domboshava, Goromonzi Rural District.</p>
               </div>
               <a 
                 href="https://wa.me/263772112011" 
